@@ -1,0 +1,182 @@
+.article-detail {
+    width: 800px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+@media screen and (max-width: 900px) {
+    .article-detail {
+        width: 90%;
+    }
+}
+.article-detail .item-title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color:rgba(0, 0, 0, 0.85);
+}
+.article-detail .underline::before {
+    background:rgba(0, 0, 0, 0.85);
+}
+.article-detail .item-author {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.item-descrption {
+    text-align: center;
+}
+/* .article-detail p {
+    text-indent: 2em;
+} */
+.item-author span {
+    display: inline-block;
+}
+/* 重置样式 */
+.article-detail-content pre{
+    padding:10px 20px;
+    background: url("../../images/blueprint.png") #fff;
+    border-radius: 5px;
+}
+.article-detail-content a{
+    color: #009a61;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,154,97,0.25);
+    padding-bottom: 1px;
+}
+.article-detail-content h1,
+.article-detail-content h2{
+    border-bottom: 1px solid #eee;
+}
+.article-detail-content h1, .article-detail-content h2 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.article-detail-content h1 {
+    font-size: 2em;
+}
+.article-detail-content h2 {
+    font-size: 1.75em;
+}
+.article-detail-content h3 {
+    font-size: 1.5em;
+}
+.article-detail-content h4 {
+    font-size: 1.25em;
+}
+.article-detail-content h1,
+.article-detail-content h2,
+.article-detail-content h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.article-detail-content h1,
+.article-detail-content h2,
+.article-detail-content h3,
+.article-detail-content h4,
+.article-detail-content h5,
+.article-detail-content h6,{
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+}
+.article-detail-content h4, .article-detail-content h5, .article-detail-content p, .article-detail-content ul, .article-detail-content ol, .article-detail-content pre, .article-detail-content blockquote, .article-detail-content table {
+    margin: 1.5em 0;
+}
+.article-detail-content ul, .article-detail-content ol {
+    margin-left: 3em;
+    padding-left: 0;
+    text-decoration: none;
+}
+.message-board {
+    list-style: none;
+    margin: 0 0 15px;
+    font-size: 13px;
+    color: #666;
+    padding: 10px;
+    border-radius: 5px;
+}
+.message-board  .green {
+    color:#009a61;
+}
+.message-board li {
+    width: 96%;
+    margin: 0 auto;
+    /* border-bottom: 1px dashed #000; */
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAEUlEQVQIHWO4e/fufxBmgAIAWVEHLYEgi9EAAAAASUVORK5CYII=) repeat-x bottom;
+    padding: 10px 0 ;
+    line-height: 20px;
+}
+.message-board li p {
+    text-indent: 0;
+    padding: 0 20px;
+    margin: 0;
+
+}
+.message-board li p .reply {
+    display: none;
+    margin-left: 20px;
+    padding: 5px 8px;
+    color:#00A8FF;
+    cursor:pointer;
+}
+.message-board li p:hover .reply {
+    display: inline;
+}
+.message-board li .replywrap {
+    padding: 10px 20px;
+}
+.message-board li .replywrap .ant-form-item {
+    margin: 0;
+}
+blockquote {  
+    padding: 10px 20px;  
+    border-left: 2px solid #009A61;
+    background: #F6F6F6;
+    color: #555;
+    font-size: 1em;
+}
+.article-detail blockquote p {
+    margin: 0;
+    text-indent: 0;
+}
+.articl-aside  {
+    width: 320px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 50;
+    box-shadow: inset 0 2px 6px #000;
+    background: #222;
+    transform: translateZ(0);
+    padding-top: 60px;
+}
+.articl-aside p {
+    color:#999;
+    line-height: 26px;
+}
+.articl-aside .articl-aside-name{
+    text-decoration:underline;
+    cursor:pointer;
+
+}
+.articl-aside p:hover {
+    color:#87daff;
+}
+.articl-aside .articl-aside-level-1 {
+    text-indent: 2em;
+}
+.articl-aside .articl-aside-level-2 {
+    text-indent: 4em;
+}
+.articl-aside .articl-aside-level-3 {
+    text-indent: 6em;
+}
+.none {
+    display: none;
+}
+.article-detail-content img{
+    width: 100%;
+    display: inline-block;
+}
