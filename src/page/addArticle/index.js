@@ -25,7 +25,7 @@ class App extends Component {
     timerId = null
     when = false
     isAdd = false;
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         var { getArticleDetails, match } = this.props;
         var id = match.params.id;
         if (match.url == "/add/article") {

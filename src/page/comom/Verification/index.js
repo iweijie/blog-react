@@ -7,12 +7,12 @@ class Verification extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         if (this.check(this.props)) {
             window.Pace.start()
         }
     }
-    componentWillReceiveProps(newPros) {
+    UNSAFE_componentWillReceiveProps(newPros) {
         var p = this.props
         if (newPros.menuInfos != p.menuInfos || newPros.userInfo != p.userInfo) {
             this.check(newPros)

@@ -2,13 +2,13 @@ import axios from "util/axios"
 import config from "config"
 import {message} from "antd"
 
-export const config_menu = "config_menu" 
+export const config_menu = "config_menu"
 export const config_manner = "config_manner"
 
 
 // 菜单配置项
 const menuConfigAction = value => ({
-    type: config_menu, 
+    type: config_menu,
     payload: value
 })
 const menuConfigActionSync = (params)=>()=>{

@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
-    Icon,
     message,
     Button,
-    Menu, 
-    Dropdown
 } from "antd"
 import dispatchAction from "util/dispatchAction"
 import history from "util/history"
@@ -19,7 +16,6 @@ class Record extends Component {
     constructor(props) {
         super(props);
     }
-    
     state = {
         visible:false,
         visible_addingentries:false,
@@ -27,7 +23,7 @@ class Record extends Component {
         endTime:moment().unix()* 1000
     }
     echarts = null;
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         this.init(this.props)
         window.observer.on("configModelHide",()=>{
             this.setState({
@@ -45,7 +41,6 @@ class Record extends Component {
         var {startTime,endTime} = this.state
         var id = match.params.id
         if(!id) history.replace("/404")
-        
         getRecordConfigActionSync({id})
         .then(result =>{
             if(result.state){
@@ -77,7 +72,7 @@ class Record extends Component {
             visible_addingentries:true
         })
     }
-    componentWillReceiveProps(next){
+    UNSAFE_componentWillReceiveProps(next){
         var {match,clearRecordAction} = this.props
         var id = match.params.id
         var newmatch = next.match
@@ -90,10 +85,9 @@ class Record extends Component {
     componentWillUnmount(){
         window.observer.remove()
     }
-    
     getOption = (data)=>{
         var {recordconf} = this.props
-        var {units,name,classify} = recordconf
+        var {units,name} = recordconf
         var option = {
             title: {
                 text: name,
@@ -173,7 +167,7 @@ class Record extends Component {
         );
     }
 }
-const mapStateToProps = (store,ownProps)=>{
+const mapStateToProps = (store)=>{
 	return {
         userInfo:store.userInfoModel,
         recordconf:store.recordconfModel,

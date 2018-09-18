@@ -24,7 +24,7 @@ class App extends Component {
         html:{__html: ""},
         nav:null
     }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         var {getArticleDetails,match} = this.props;
         var id = match.params.id;
         if(!id){
@@ -80,7 +80,6 @@ class App extends Component {
                     data.child  = []
                 }
                 if(data.child.length && next.level > data.child[data.child.length -1].level){
-                    
                     if(!data.child[data.child.length -1].child){
                         data.child[data.child.length -1].child  = []
                     }
@@ -98,7 +97,7 @@ class App extends Component {
         var {asyncArticlTime} = this.props
         if(!localStorage){
             asyncArticlTime({id,time})
-        } 
+        }
         var  timeId = "timeId"
         var ids =  getLocation(timeId)
         if(!ids){
@@ -132,7 +131,7 @@ class App extends Component {
     componentWillUnmount(){
         this.props.articleDetailsAction({})
     }
-    componentWillReceiveProps(next){
+    UNSAFE_componentWillReceiveProps(next){
         if(next.detial !=this.props.detial){
             var data = next.detial
             var obj = this.getContent(data.content)

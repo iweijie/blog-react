@@ -1,10 +1,8 @@
 
 import React, {Component} from 'react';
-import history from "util/history"
 import {
-    Icon,
-    Form, 
-    Input, 
+    Form,
+    Input,
     Row,
     Col,
     Button,
@@ -18,13 +16,12 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
     }
     componentWillUnmount(){
     }
     submit = ()=>{
         var {userInfo,syncArticleLeavesubmit,detial} = this.props
-        
         var {getFieldsValue} = this.props.form;
         var data = getFieldsValue(["name","leave"])
         var params = {articleId:detial._id}
@@ -39,9 +36,6 @@ class App extends Component {
             if(!params[k]) return message.warning("请填写完整参数")
         }
         syncArticleLeavesubmit(params)
-        .then(result=>{
-            
-        })
     }
     render() {
         var data = this.props.detial;
@@ -71,12 +65,11 @@ class App extends Component {
                                 )}
                             </FormItem>
                         </Col>
-                    </Row> 
+                    </Row>
                 </Form>
-                
                 <Row>
                     <Button onClick={this.submit}>提交</Button>
-                </Row> 
+                </Row>
             </div>
         );
     }

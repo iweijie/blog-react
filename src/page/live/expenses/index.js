@@ -19,7 +19,7 @@ class App extends Component {
     state = {
     }
     echartsWrap = null
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
     }
     componentDidMount(){
         var expenses = this.refs.expenses
@@ -116,19 +116,18 @@ class App extends Component {
                     data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203]
                 }
             ]
-        };  
+        };
     }
     handleCancel = ()=>{
     }
     componentWillUnmount(){
     }
     render() {
-        
         return (
             <div className="live">
-                <div className="wrap-echarts"> 
+                <div className="wrap-echarts">
                     <Filter {...this.props} />
-                    <div className="echarts-container" id="wrap-expenses" ref="expenses"></div> 
+                    <div className="echarts-container" id="wrap-expenses" ref="expenses"></div>
                 </div>
             </div>
         );

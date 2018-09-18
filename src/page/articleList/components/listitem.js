@@ -24,7 +24,7 @@ class Listitem extends Component {
         var {asyncArticlTime} = this.props
         if(!localStorage){
             asyncArticlTime({id,time})
-        } 
+        }
         var  timeId = "timeId"
         var ids =  getLocation(timeId)
         if(!ids){
@@ -42,7 +42,6 @@ class Listitem extends Component {
         history.push("/edit/article/" + id)
     }
     delHandle = ()=>{
-        
     }
     render() {
         var {data,userInfo} = this.props
@@ -60,7 +59,6 @@ class Listitem extends Component {
                     </div>
                     :null
                 }
-                
                 <div className="article-list-item-author">
                     <span className="margin-ms-right"><Icon className="padding-xm-right" type="user" />{data.autor&&data.autor.name}</span>
                     <span className="margin-ms-right"><Icon className="padding-xm-right" type="calendar" />{timestampFromat(data.createTime)}</span>

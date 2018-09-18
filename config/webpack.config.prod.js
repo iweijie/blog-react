@@ -41,10 +41,11 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
 // However, our output is structured with css, js and media folders.
 // To have this structure working with relative paths, we have to use custom options.
-const extractTextPluginOptions = shouldUseRelativeAssetPaths
-  ? // Making sure that the publicPath goes back to to build folder.
-  { publicPath: Array(cssFilename.split('/').length).join('../') }
-  : {};
+const extractTextPluginOptions = shouldUseRelativeAssetPaths ? // Making sure that the publicPath goes back to to build folder.
+  {
+    publicPath: Array(cssFilename.split('/').length).join('../')
+  } :
+  {};
 
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
@@ -70,8 +71,8 @@ module.exports = {
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
       path
-        .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/'),
+      .relative(paths.appSrc, info.absoluteResourcePath)
+      .replace(/\\/g, '/'),
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -94,16 +95,16 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
-      actions: path.resolve(__dirname, '../src/actions'),
-      components: path.resolve(__dirname, '../src/components'),
-      container: path.resolve(__dirname, '../src/container'),
-      reducers: path.resolve(__dirname, '../src/reducers'),
-      style: path.resolve(__dirname, '../src/style'),
-      util: path.resolve(__dirname, '../src/util'),
-      page: path.resolve(__dirname, '../src/page'),
-      images: path.resolve(__dirname, '../src/images'),
-      json: path.resolve(__dirname, '../src/json'),
-      config: path.resolve(__dirname, '../src/config'),
+      'actions': path.resolve(__dirname, '../src/actions'),
+      'components': path.resolve(__dirname, '../src/components'),
+      'container': path.resolve(__dirname, '../src/container'),
+      'reducers': path.resolve(__dirname, '../src/reducers'),
+      'style': path.resolve(__dirname, '../src/style'),
+      'util': path.resolve(__dirname, '../src/util'),
+      'page': path.resolve(__dirname, '../src/page'),
+      'images': path.resolve(__dirname, '../src/images'),
+      'json': path.resolve(__dirname, '../src/json'),
+      'config': path.resolve(__dirname, '../src/config'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -126,16 +127,14 @@ module.exports = {
       {
         test: /\.(js|jsx|mjs)$/,
         enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
+        use: [{
+          options: {
+            formatter: eslintFormatter,
+            eslintPath: require.resolve('eslint'),
 
-            },
-            loader: require.resolve('eslint-loader'),
           },
-        ],
+          loader: require.resolve('eslint-loader'),
+        }, ],
         include: paths.appSrc,
       },
       {
@@ -159,7 +158,6 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-
               compact: true,
             },
           },
@@ -178,16 +176,14 @@ module.exports = {
           {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
+              Object.assign({
                   fallback: {
                     loader: require.resolve('style-loader'),
                     options: {
                       hmr: false,
                     },
                   },
-                  use: [
-                    {
+                  use: [{
                       loader: require.resolve('css-loader'),
                       options: {
                         importLoaders: 1,
@@ -214,7 +210,7 @@ module.exports = {
                           }),
                         ],
                       },
-                    },
+                    }
                   ],
                 },
                 extractTextPluginOptions
@@ -223,9 +219,50 @@ module.exports = {
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           {
+            test: /\.less$/,
+            // exclude: /node_modules|antd\.less/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                  localIdentName: '[name]__[local]__[hash:base64:5]',
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+              {
+                loader: require.resolve('less-loader'), // compiles Less to CSS
+                options: {
+                  javascriptEnabled: true
+                }
+              },
+            ],
+          },
+          {
             test: /\.scss$/,
             loaders: ['style-loader', 'css-loader', 'sass-loader'],
           },
+          // modules: true, // 新增对css modules的支持
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
@@ -300,6 +337,7 @@ module.exports = {
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
       filename: cssFilename,
+      allChunks: true
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without

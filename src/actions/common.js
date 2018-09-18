@@ -91,7 +91,7 @@ const syncuserInfoCheckAction = (params) => (dispatch) => {
 
 //菜单分类配置项
 const mannerAction = value => ({
-    type: mannerInfo, 
+    type: mannerInfo,
     payload: value
 })
 

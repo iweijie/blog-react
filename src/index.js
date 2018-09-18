@@ -13,7 +13,7 @@ import {createLogger} from 'redux-logger'
 import reducer from './reducers'
 import App from './main'
 import "util/pace.js"
-import  "util/pace/templates/pace-theme-minimal.tmpl.css"
+import  "util/pace/themes/blue/pace-theme-minimal.css"
 import "style/basics.css"
 
 const middleware = [thunk]
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const store = createStore(
-    reducer,    
+    reducer,
     applyMiddleware(...middleware)
 )
 

@@ -15,7 +15,7 @@ class TopNav extends React.Component {
     }
 
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
     }
     clickHandle = () => {
         this.props.menutoggleAction(true)

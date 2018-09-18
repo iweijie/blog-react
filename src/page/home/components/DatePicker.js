@@ -32,7 +32,7 @@
 //         this.changeData = this.changeData.bind(this)
 //         this.formatChangeData = this.formatChangeData.bind(this)
 //     }
-//     componentWillMount() {
+//     UNSAFE_componentWillMount() {
 //         let { currentDay, month, year } = this.state;
 //         this.dateArr(year + '-' + month + '-' + currentDay)
 //     }

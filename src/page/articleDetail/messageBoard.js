@@ -20,7 +20,7 @@ class App extends Component {
         replyName: null,
         replyUserId: null
     }
-    componentWillMount() { }
+    UNSAFE_componentWillMount() { }
     submit = () => {
         var name = localStorage.getItem("leaveName")
         var { userInfo, syncArticleLeavesubmit, detial, articleDetailsAction } = this.props

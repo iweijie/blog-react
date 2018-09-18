@@ -13,14 +13,12 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
-
+    UNSAFE_componentWillMount(){
     }
     changeDate = (time)=>{
         console.log(time)
     }
     componentWillUnmount(){
-        
     }
     setBgStyle = (dom)=>{
         if(!dom) return;

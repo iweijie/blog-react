@@ -27,12 +27,12 @@ export default class Bundle extends Component {
     //     return true
     // }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // this.check(this.props)
         this.load(this.props)
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.load.toString() !== this.props.load.toString()) {
             this.load(nextProps)
         }

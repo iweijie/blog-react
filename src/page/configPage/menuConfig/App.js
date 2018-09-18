@@ -9,9 +9,8 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
     }
-        
     componentWillUnmount(){
         window.observer.remove()
     }

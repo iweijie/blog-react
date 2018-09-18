@@ -9,7 +9,7 @@ class LeftMenuContainer extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         var {userInfo,syncMenuAction,syncuserInfoCheckAction} = this.props;
         var {isLogin} = userInfo;
         // window.observer.once("login",(islogin)=>{

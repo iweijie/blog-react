@@ -20,13 +20,13 @@ class App extends Component {
     }
     page = 1
     pageSize = 10
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         var {match} = this.props;
         var id = match.params.id;
         if(!id) return
         this.getList({id,page:this.page,pageSize:this.pageSize})
     }
-    componentWillReceiveProps(next){
+    UNSAFE_componentWillReceiveProps(next){
         var oldMatch = this.props.match
         var nowMatch = next.match;
         if(oldMatch.url != nowMatch.url){

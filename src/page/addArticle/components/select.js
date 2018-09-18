@@ -5,13 +5,13 @@
 *时间: 2018/4/16 10:48
 */
 import React, {Component} from 'react';
-import { 
-    Form, 
-    Input, 
+import {
+    Form,
+    Input,
     Select,
     Row,
     Col,
-    Radio 
+    Radio
 } from 'antd';
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -49,19 +49,18 @@ class SelectDate extends Component {
                         <FormItem>
                             {getFieldDecorator('title', {
                                 rules: [{ required: true, message: 'Please input title!' }],
-                                initialValue: title,   
+                                initialValue: title,
                             })(
                                 <Input placeholder="标题" />
                             )}
                         </FormItem>
                     </Col>
-                    
                     <Col span={24} style={{paddingLeft:"40px",position:"relative"}}>
                         <label className="select-label">分类：</label>
                         <FormItem>
                             {getFieldDecorator('classify', {
                                 rules: [{ required: true, message: 'Please input title!' }],
-                                initialValue: classify,   
+                                initialValue: classify,
                             })(
                                 <Select  placeholder="分类">
                                     {options}
@@ -75,7 +74,7 @@ class SelectDate extends Component {
                         <FormItem>
                             {getFieldDecorator('description', {
                                 rules: [{ required: true, message: 'Please input description!' }],
-                                initialValue: description,   
+                                initialValue: description,
                             })(
                                 <TextArea rows={2} placeholder="描述" />
                             )}
@@ -95,7 +94,7 @@ class SelectDate extends Component {
                             )}
                         </FormItem>
                     </Col>
-                </Row> 
+                </Row>
             </Form>
         );
     }

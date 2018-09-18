@@ -4,16 +4,12 @@ import {connect} from 'react-redux';
 import dispatchAction from "util/dispatchAction"
 import Classification from "./components/classification"
 import "../comom.css"
-import { 
-    Button ,
-    Table
-} from 'antd';
 
 class App extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
 
     }
     
@@ -21,8 +17,6 @@ class App extends Component {
         window.observer.remove()
     }
     render() {
-        var { articleClassifyConfigActionSync } = this.props
-        
         const content = (
             <div className="config">
                 <Classification {...this.props}></Classification>
@@ -34,7 +28,7 @@ class App extends Component {
         );
     }
 }
-const mapStateToProps = (store,ownProps)=>{
+const mapStateToProps = (store)=>{
 	return {
         menuInfos:store.menuInfos
 	}

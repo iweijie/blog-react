@@ -36,7 +36,7 @@ export const filterMenu = function(arr,flag){
                 }
             }
         }else {
-            path.push(val.url) 
+            path.push(val.url)
         }
         list.push(val)
     }

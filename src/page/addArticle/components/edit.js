@@ -77,7 +77,7 @@ class App extends Component {
             clearInterval(this.setDefaultValueTimerId)
         }, 200)
     }
-    componentWillReceiveProps(next) {
+    UNSAFE_componentWillReceiveProps(next) {
         if (next.defualtvalue != this.props.defualtvalue) {
             this.setDefaultValue(next.defualtvalue)
         }

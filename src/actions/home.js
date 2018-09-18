@@ -5,7 +5,7 @@ import {message} from "antd"
 export const homeBgImage = "HomeBgImage"
 // 首页背景图
 const getHomeBgImageAction = value => ({
-    type: homeBgImage, 
+    type: homeBgImage,
     payload: value
 })
 const getHomeBgImageActionSync = ()=>(dispatch)=>{
