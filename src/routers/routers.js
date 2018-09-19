@@ -62,13 +62,13 @@ const AsyncLiveExpenses = (props) => (
     </Bundle>
 )
 /**
- *  展示类型新增项界面
+ *  上传界面
  */
-// const AsyncMannerConfig = (props) => (
-//     <Bundle load={() => import('../page/configPage/mannerConfig/App')}>
-//         {(MannerConfig) => <Verification><MannerConfig {...props} /></Verification>}
-//     </Bundle>
-// )
+const AsyncUploadCom = (props) => (
+    <Bundle load={() => import('../page/upload/App')}>
+        {(UploadCom) => <Verification><UploadCom {...props} /></Verification>}
+    </Bundle>
+)
 
 /**
  *  记录类界面
@@ -137,6 +137,11 @@ export const routes = [
     {
         path: '/live/expenses',
         component: AsyncLiveExpenses,
+        exact: true,
+    },
+    {
+        path: '/upload',
+        component: AsyncUploadCom,
         exact: true,
     },
     {
