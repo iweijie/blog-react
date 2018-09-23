@@ -6,36 +6,36 @@
 
 
 
- /**
- *作者: weijie
- *功能描述: menu 过滤
- *时间: 2018/4/2 14:35
- */
+/**
+*作者: weijie
+*功能描述: menu 过滤
+*时间: 2018/4/2 14:35
+*/
 
-export const filterMenu = function(arr,flag){
+export const filterMenu = function (arr, flag) {
     var obj = {
-        menuList:[],
-        menuPath:[],
-        origin:arr
+        menuList: [],
+        menuPath: [],
+        origin: arr
     }
-    if(!Array.isArray(arr))return obj;
+    if (!Array.isArray(arr)) return obj;
     var list = obj.menuList,
         path = obj.menuPath;
-    for(var i=0,l=arr.length;i<l;i++){
+    for (var i = 0, l = arr.length; i < l; i++) {
         var val = arr[i];
-        if(!val.isPublic && !flag){
+        if (!val.isPublic && !flag) {
             continue
         }
         var child = val.childrens
-        if(child && child.length){
-            for(var len=child.length,j=len-1;j>=0;j--){
-                if(!child[j].isPublic && !flag){
-                    child.splice(j,1)
-                }else {
+        if (child && child.length) {
+            for (var len = child.length, j = len - 1; j >= 0; j--) {
+                if (!child[j].isPublic && !flag) {
+                    child.splice(j, 1)
+                } else {
                     path.push(child[j].url)
                 }
             }
-        }else {
+        } else {
             path.push(val.url)
         }
         list.push(val)
@@ -110,12 +110,12 @@ export const getLocation = (name) => {
     let local = localStorage.getItem(name)
     return JSON.parse(local)
 }
-export const setLocation = (name,obj) => {
-    if(!obj || !name) return
-    if(typeof obj == "string"){
-        localStorage.setItem(name,obj)
-    }else {
-        localStorage.setItem(name,JSON.stringify(obj))
+export const setLocation = (name, obj) => {
+    if (!obj || !name) return
+    if (typeof obj == "string") {
+        localStorage.setItem(name, obj)
+    } else {
+        localStorage.setItem(name, JSON.stringify(obj))
     }
 }
 /**
@@ -153,15 +153,55 @@ export const timestampFromat = (v, t = 1, interval = '-') => {
  *参数说明:
  * @param {number} v 毫秒数
  */
-export const setKey = (arr=[]) => {
-    arr.forEach((v,k)=>{
-        if(v.key === undefined){
+export const setKey = (arr = []) => {
+    arr.forEach((v, k) => {
+        if (v.key === undefined) {
             v.key = k
         }
     })
     return arr
 }
-
+/**
+ *作者: weijie
+ *功能描述: 防抖
+ */
+export function debounce(fn, delay = 200) {
+    var timer;
+    return function () {
+        var th = this;
+        var args = arguments;
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+            timer = null;
+            fn.apply(th, args);
+        }, delay);
+    };
+}
+/**
+ *作者: weijie
+ *功能描述: 节流
+ */
+export function throttle(fn, interval = 200) {
+    var last, timer;
+    return function () {
+        var th = this;
+        var args = arguments;
+        var now = Date.now();
+        if (last  && now - last < interval) {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                last = now;
+                fn.apply(th, args);
+            }, interval);
+        } else {
+            clearTimeout(timer);
+            last = now;
+            fn.apply(th, args);
+        }
+    }
+}
 /**
  *作者: weijie
  *功能描述: 页面不兼容CSS3的提示信息

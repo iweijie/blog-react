@@ -8,10 +8,10 @@ const getHomeBgImageAction = value => ({
     type: homeBgImage,
     payload: value
 })
-const getHomeBgImageActionSync = ()=>(dispatch)=>{
-    return axios.post(`${config.basicsUrl}/api/request`)
+const getHomeBgImageActionASync = ()=>(dispatch)=>{
+    return axios.get(`${config.fileUrl}/api/recommend/image/zr`)
         .then(data => {
-            if(data.state){
+            if(data.state === 1){
                 dispatch(getHomeBgImageAction(data.result))
             }
             return data
@@ -23,5 +23,5 @@ const getHomeBgImageActionSync = ()=>(dispatch)=>{
 
 export default  {
     getHomeBgImageAction,
-    getHomeBgImageActionSync,
+    getHomeBgImageActionASync,
 }

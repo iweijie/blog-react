@@ -5,7 +5,7 @@ import {homeBgImage} from "actions/home"
 *参数说明:
 */
 
-function homeBgModel(state =[], action) {
+function homeBgList(state =[], action) {
     switch (action.type) {
         case homeBgImage:
             return action.payload ;
@@ -15,5 +15,5 @@ function homeBgModel(state =[], action) {
 }
 
 export default {
-    homeBgModel,
+    homeBgList,
 }

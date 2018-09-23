@@ -55,7 +55,7 @@ const getRecordConfigActionSync = (params)=>(dispatch)=>{
         })
 }
 //设置记录
-const setRecordListActionSync = (params)=>(dispatch)=>{
+const setRecordListActionSync = (params)=>()=>{
     return axios.post(`${config.basicsUrl}/api/record/setrecord`,params)
         .then(data => {
             if(data.state){

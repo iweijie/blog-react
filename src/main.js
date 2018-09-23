@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom'
 import { routes } from './routers/routers'
-import Menu from "page/leftMenu"
-import Login from "page/login"
-import Topnav from "page/topNav"
+// import Menu from "page/leftMenu"
+// import Login from "page/login"
+// import Topnav from "page/topNav"
 import history from "util/history"
 // import io from "util/socket"
 import "util/observer"
@@ -18,6 +18,11 @@ class App extends Component {
     state = {
     }
     componentDidMount() {
+        // document.addEventListener("selectstart",(event)=>{
+        //     console.log("test")
+        //     event.returnValue=false;
+        //     return false
+        // })
     }
     back = () => {
         history.go(-1)
@@ -31,23 +36,12 @@ class App extends Component {
     }
     render() {
         const content = (<Router history={history}>
-            <div>
-                <Menu />
-                <Topnav />
-                <div className="right">
-                    <div className="main">
-                        <Switch>
-                            {routes.map((route, i) => (
-                                <Route key={i} {...route} />
-                            ))}
-                        </Switch>
-                    </div>
-                </div>
-                <Login />
-                <div className="overlays">
-                    <div onClick={this.gotop} className="shortcut">UP</div>
-                    <div onClick={this.back} className="shortcut margin-ss-top">back</div>
-                </div>
+            <div className="main">
+                <Switch>
+                    {routes.map((route, i) => (
+                        <Route key={i} {...route} />
+                    ))}
+                </Switch>
             </div>
         </Router>)
 
@@ -57,6 +51,8 @@ class App extends Component {
     }
 }
 export default connect()(App)
+
+{/* <Menu />   <Topnav />*/ }
 
 
 

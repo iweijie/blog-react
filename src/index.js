@@ -15,6 +15,7 @@ import App from './main'
 import "util/pace.js"
 import  "util/pace/themes/blue/pace-theme-minimal.css"
 import "style/basics.css"
+import "./font/Offline-Rough.otf"
 
 const middleware = [thunk]
 if (process.env.NODE_ENV !== 'production') {

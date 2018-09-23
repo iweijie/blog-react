@@ -7,13 +7,15 @@ import common from "./common"
 import articleAction from "./article"
 import configAction from "./config"
 import home from "./home"
+import fileUpload from "./fileUpload"
 
 
 const actions = {
     ...common,
     ...articleAction,
     ...configAction,
-    ...home
+    ...home,
+    ...fileUpload
 }
 
 export default actions

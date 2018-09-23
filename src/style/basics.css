@@ -23,9 +23,6 @@ body {
         font-size: 12px !important;
     }
 }
-body {
-    overflow: hidden;
-}
 
 ::-webkit-scrollbar-track-piece {
     background-color: #f8f8f8;
@@ -335,4 +332,9 @@ ul,li,ol {
 }
 .mr10 {
     margin-right: 10px;
+}
+
+@font-face {
+    font-family: Offline;
+    src:url('../font/Offline-Rough.otf')
 }
