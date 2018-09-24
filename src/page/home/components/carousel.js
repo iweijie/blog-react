@@ -1,130 +1,140 @@
 
-import React, { Component } from 'react';
-import { throttle } from "util/baseTool"
-import { Motion, spring } from 'react-motion';
-class Carousel extends Component {
+import React, { PureComponent } from 'react';
+class Carousel extends PureComponent {
     constructor(props) {
         super(props);
     }
     state = {
-        height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-        widht: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-        opcity: false,
-        index: -1
-    }
-    UNSAFE_componentWillMount() {
+        opcity: 0,
     }
     componentDidMount() {
-        this.isloadding = true ;
-        window.addEventListener("resize", throttle(() => {
-            let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-            let widht = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-            this.setState({
-                height,
-                widht
-            })
-        }, 100))
+        this.isloadding = true;
+        this.start(this.index, this.props.list)
     }
-    componentWillReceiveProps(next) {
+    UNSAFE_componentWillReceiveProps(next) {
         if (next.list !== this.props.list) {
             this.imageDom = [];
-            this.loadImage(next.list)
-            this.circulation()  
+            this.start(this.index, next.list)
         }
     }
-    // 启动
-    test = true
+    // 图片索引
+    index = 0
     // 存放 image
     imageDom = [];
+    // 当前倒计时引用
+    siteTimerId = null
     // 当前图片是否加载完
     isloadding = false;
     // carousel dom引用
     carousel = null;
-    setImage = (index,list) => {
-        if(!this.isloadding) return ;
-        this.isloadding = false;
-        let carouselDom ;
-        if (this.carousel) {
-            carouselDom = this.carousel;
-        } else {
-            this.carousel = carouselDom = document.querySelector("#carousel")
+    // carouselWrap dom引用
+    carouselWrap = null;
+    // 获取轮播图容器
+    getCarouselDom = () => {
+        if (!this.carousel) {
+            let div = document.createElement("div");
+            div.classList.add("home-bg-img")
+            this.carousel = div
         }
-        if (index + 1 >= list.length || this.imageDom.length === list.length) {
-            this.isloadding = true;
-            return
-        }
-        let img = new Image();
+        return this.carousel
+    }
+    // 获取当前图片实例
+    getCurrentImg = (index, list) => {
         let _this = this;
-        img.onerror = img.onload = () => {
-            _this.isloadding = true
-            _this.imageDom.push(img)
-            if (index === 0) {
-                carouselDom.appendChild(img)
-                _this.setState({
-                    opcity:true
-                })
-            }
-        }
-        img.src = list[index].fullUrl;
-    }
-    loadImage = (list) => {
-        list =  list || this.props.list;
-        if (!list.length) return;
-        let { index } = this.state, carouselDom,next;
-        if (this.carousel) {
-            carouselDom = this.carousel;
-        } else {
-            this.carousel = carouselDom = document.querySelector("#carousel")
-        }
-        if (index + 1 >= list.length) {
-            next = 0
-        } else {
-            next =index + 1
-        }
-        if (this.imageDom[next]) {
-            if(this.imageDom[index]){
-                carouselDom.removeChild(this.imageDom[index])
-            }
-            carouselDom.appendChild(this.imageDom[next])
-            this.setState({
-                index:next,
-                opacity: true
-            }, this.setImage(next,list))
-        } else {
-            this.setImage(next,list)
-        }
+        return new Promise((resolve) => {
 
+            if (_this.imageDom[index]) {
+                resolve(_this.imageDom[index])
+            } else {
+                _this.loaddingImg(list[index].fullUrl)
+                    .then(img => {
+                        // 用于缓存
+                        _this.imageDom[index] = img
+                        resolve(img)
+                    })
+            }
+        })
     }
-    circulation = ()=>{
-        let fn = throttle(this.loadImage, 2000),
-            _this = this;
-        let callback = ()=>{
-            if(_this.isloadding){
-                fn()
-            }
-            if(_this.test){
-                requestAnimationFrame(callback)
-            }else {
-                callback = null;
-            }
+    // 设置下一个图的索引
+    setNextIndex = (list) => {
+        let index = this.index;
+        let len = list.length;
+        if (index + 1 < len) {
+            this.index++
+        } else {
+            this.index = 0
         }
-        requestAnimationFrame(callback)
-    };
+    }
+    // 加载图片
+    loaddingImg = (url) => {
+        return new Promise((resolve) => {
+            let img = new Image();
+            img.onerror = img.onload = () => {
+                resolve(img)
+            }
+            img.src = url
+        })
+    }
+    // 一次图片显示的整个流程
+    circulation = (index, list) => {
+        let _this = this;
+        return this.getCurrentImg(index, list)
+            .then(img => {
+                return new Promise(resolve => {
+                    let getCarouselDom = _this.getCarouselDom();
+                    getCarouselDom.classList.remove("opacity-1")
+                    setTimeout(() => {
+
+                        if (getCarouselDom.__childImg) {
+                            getCarouselDom.remove(getCarouselDom.__childImg)
+                        }
+                        getCarouselDom.__childImg = img;
+                        getCarouselDom.appendChild(img)
+                        if (!this.carouselWrap) {
+                            this.carouselWrap = document.querySelector("#carousel-warp")
+                        }
+                        this.carouselWrap.appendChild(this.carousel)
+                        getCarouselDom.classList.add("opacity-1")
+                        setTimeout(resolve, 150)
+                    }, 300)
+                })
+            })
+    }
+    // 启动轮播图
+    start = (index, list) => {
+        if (this.isloadding && list.length) {
+            let _this = this;
+            this.circulation(index, list)
+                .then(() => {
+                    _this.setNextIndex(list)
+                    let nextIndex = _this.index;
+                    Promise.all([
+                        _this.getCurrentImg(nextIndex, list),
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                if (!_this.end) {
+                                    resolve()
+                                } else {
+                                    reject()
+                                }
+                            }, 6000)
+                        })
+                    ])
+                        .then(() => {
+                            // debugger
+                            _this.start(nextIndex, list)
+                        })
+                })
+        }
+    }
+    end = false;
     componentWillUnmount() {
     }
     render() {
-        let { height } = this.state;
+        let { height } = this.props.browserInfo;
         return (
 
-            <div className="home-bg" style={{ height: (height - 56) + "px" }}>
-                <Motion style={{ opcity: spring(this.state.opcity ? 1 : 0) }}>
-                    {
-                        ({ opcity }) => (
-                            <div id="carousel" className="home-bg-img" style={{ opacity: opcity }}>
-                            </div>
-                        )
-                    }
-                </Motion>
+            <div id="carousel-warp" className="home-bg" style={{ height: (height - 56) + "px" }}>
                 <div className="say">
                     <div className="title">WEIJIE</div>
                     <div className="oath">from small beginning come great things</div>
@@ -135,6 +145,12 @@ class Carousel extends Component {
 }
 
 export default Carousel
-// background: `url(${src}) no-repeat center center`
 
-{/* <img src={src} alt="" /> */}
+
+{/* <Motion onRest={() => { console.log("end ------------- 1", this.state.opcity) }} style={{ opcity: spring(this.state.opcity ? 1 : 0.1) }}>
+    {
+        ({ opcity }) => (
+            <div id="carousel" className="home-bg-img" style={{ opacity: opcity }}>111</div>
+        )
+    }
+</Motion> */}

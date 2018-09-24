@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom'
 import { routes } from './routers/routers'
+import { throttle } from "util/baseTool"
+import dispatchAction from "util/dispatchAction"
 // import Menu from "page/leftMenu"
 // import Login from "page/login"
 // import Topnav from "page/topNav"
@@ -18,31 +20,25 @@ class App extends Component {
     state = {
     }
     componentDidMount() {
-        // document.addEventListener("selectstart",(event)=>{
-        //     console.log("test")
-        //     event.returnValue=false;
-        //     return false
-        // })
+        window.addEventListener("resize", throttle(() => {
+            let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+            let widht = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+            this.props.resizeAction({
+                height,
+                widht
+            })
+        }, 100))
     }
     back = () => {
         history.go(-1)
     }
-    gotop = () => {
-        var main = document.querySelector(".main")
-        main.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        })
-    }
     render() {
         const content = (<Router history={history}>
-            <div className="main">
-                <Switch>
-                    {routes.map((route, i) => (
-                        <Route key={i} {...route} />
-                    ))}
-                </Switch>
-            </div>
+            <Switch>
+                {routes.map((route, i) => (
+                    <Route key={i} {...route} />
+                ))}
+            </Switch>
         </Router>)
 
         return (
@@ -50,9 +46,10 @@ class App extends Component {
         );
     }
 }
-export default connect()(App)
-
-{/* <Menu />   <Topnav />*/ }
+const mapStateToProps = () => {
+    return {}
+}
+export default connect(mapStateToProps,dispatchAction)(App)
 
 
 

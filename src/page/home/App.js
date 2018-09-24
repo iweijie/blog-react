@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import dispatchAction from "util/dispatchAction"
 import Carousel from "./components/carousel"
+import Topnav from "../topNav/index"
+import { throttle } from "util/baseTool"
 // import Datepicker from "./components/DatePicker"
 import "./css.scss"
 
@@ -17,8 +19,13 @@ class App extends Component {
         console.log(time)
     }
     componentDidMount() {
+        window.addEventListener("scroll",throttle(this.scrollHandle,50))
     }
     componentWillUnmount() {
+    }
+    scrollHandle = ()=>{
+        let top = document.documentElement.scrollTop || document.body.scrollTop;
+        this.props.homeScrollTopAction(top)
     }
     setBgStyle = (dom) => {
         if (!dom) return;
@@ -30,18 +37,13 @@ class App extends Component {
         }
     }
     render() {
-        let { homeBgList } = this.props;
-        let arr= [1,2,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        let { homeBgList,browserInfo,homeScrollToTop } = this.props;
+        let isFixed = browserInfo.height - homeScrollToTop <= 56 ;
         const content = (
-            <div className="home">
-                <Carousel list={homeBgList}></Carousel>
-                <ul>
-                    {
-                        arr.map((v,k)=>{
-                            return <li key={k}>{k}</li>
-                        })
-                    }
-                </ul>
+            <div ref="home" className="home">
+                <Carousel list={homeBgList} browserInfo={browserInfo}></Carousel>
+                <Topnav isFixed={isFixed}/>
+                <div style={{height:"5000px"}}></div>
             </div>
         )
 
@@ -54,7 +56,9 @@ const mapStateToProps = (store) => {
     return {
         menuInfos: store.menuInfos,
         userInfo: store.userInfoModel,
-        homeBgList: store.homeBgList
+        homeBgList: store.homeBgList,
+        browserInfo : store.browserInfo,
+        homeScrollToTop: store.homeScrollToTop,
     }
 }
 

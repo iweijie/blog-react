@@ -3,6 +3,7 @@ import config from "config"
 import {message} from "antd"
 
 export const homeBgImage = "HomeBgImage"
+export const homeScroll = "homeScroll"
 // 首页背景图
 const getHomeBgImageAction = value => ({
     type: homeBgImage,
@@ -20,8 +21,14 @@ const getHomeBgImageActionASync = ()=>(dispatch)=>{
             message.error(e.messgae)
         })
 }
-
+const homeScrollTopAction = (value)=>{
+    return {
+        type: homeScroll,
+        payload: value
+    }
+}
 export default  {
+    homeScrollTopAction,
     getHomeBgImageAction,
     getHomeBgImageActionASync,
 }

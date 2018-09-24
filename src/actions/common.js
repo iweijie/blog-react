@@ -8,6 +8,7 @@ export const menuInfo = "menuInfo"
 export const userInfo = "userInfo"
 export const mannerInfo = "mannerInfo"
 export const menutoggle = "menutoggle"
+export const resize = "resize"
 
 import { message } from 'antd';
 
@@ -94,6 +95,11 @@ const mannerAction = value => ({
     type: mannerInfo,
     payload: value
 })
+// 浏览器 resize
+const resizeAction = value => ({
+    type:resize ,
+    payload: value
+})
 
 export default {
     menuAction,
@@ -103,4 +109,5 @@ export default {
     syncuserInfoAction,
     syncuserInfoCheckAction,
     mannerAction,
+    resizeAction
 }

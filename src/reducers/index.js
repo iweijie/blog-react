@@ -14,8 +14,7 @@ import {
 import menuInfos from "./menu"
 import home from "./home"
 import article from "./article"
-import config from "./config"
-// import record from "./record"
+import common from "./common"
 
 function userInfoModel(state = {
     isLogin: false,
@@ -45,8 +44,7 @@ const rootReducer = combineReducers({
     ...menuInfos,
     ...home,
     ...article,
-    ...config,
-    // ...record
+    ...common,
 })
 
 export default rootReducer
