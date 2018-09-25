@@ -1,27 +1,18 @@
 // import {articleType} from "actions/article"
 import {articleList,articleDetials,cleararticleList,pushReview} from "actions/article"
 
-function articleListModel(state = {}, action) {
+function articleListModel(state = {
+    result:[],
+    totle:0
+}, action) {
     switch (action.type) {
         case articleList:
-            var {type,list,page,more} = action.payload
-            var data = state[type]
-            if(data){
-                if(list && list.length){
-                    state[type].list.push(...list)
-                    state[type].page = page
-                    state[type].more = more
-                }else {
-                    state[type].more = more
-                }
-            }else {
-                state[type] = {
-                    list,page,more
-                }
-            }
-            return { ...state } ;
+            return action.payload
         case cleararticleList:
-            return {}
+            return {
+                result:[],
+                totle:0
+            }
         default:
             return state;
     }

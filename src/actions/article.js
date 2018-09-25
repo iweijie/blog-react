@@ -16,29 +16,13 @@ const articleListAction = value => ({
     type: articleList,
     payload: value
 })
-const syncGetArticleList = (params) => (dispatch) => {
-    var { id, page, pageSize } = params
-    return axios.post(`${config.basicsUrl}/api/article/list`, params)
+const getArticleListAsync = (params) => (dispatch) => {
+    return axios.get(`${config.basicsUrl}/api/article/list`, {params})
         .then(data => {
             if (data.state == 1) {
-                const resdata = data.result;
-                var len = resdata.length
-                if (len) {
-                    dispatch(articleListAction({
-                        type: id,
-                        page,
-                        list: resdata,
-                        more: len == pageSize
-                    }))
-                } else {
-                    dispatch(articleListAction({
-                        type: id,
-                        more: false
-                    }))
-                }
-                return len && len == pageSize
+                dispatch(articleListAction(data))
+                return data
             }
-
         }).catch(e => {
             console.log(e);
             message.error(e.messgae)
@@ -116,7 +100,7 @@ const asyncArticlTime = (params) => () => {
 export default {
     clearArticleListAction,
     articleListAction,
-    syncGetArticleList,
+    getArticleListAsync,
     articleDetailsAction,
     getArticleDetails,
     articlesubmitAction,

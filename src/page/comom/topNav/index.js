@@ -1,13 +1,11 @@
 import React from "react"
-import { connect } from 'react-redux';
-import dispatchAction from "util/dispatchAction"
 import { Link } from 'react-router-dom'
 import "./css.scss"
 import {
     Icon
 } from "antd"
 
-class TopNav extends React.Component {
+class TopNav extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -30,7 +28,7 @@ class TopNav extends React.Component {
         },
     ]
     render() {
-        let {isFixed} = this.props ;
+        let { isFixed } = this.props;
         let className = isFixed ? "top-nav-fixed top-nav" : "top-nav"
         return (
             <nav>
@@ -41,7 +39,7 @@ class TopNav extends React.Component {
                     {
                         this.json.map((v) => {
                             return <li key={v.url}>
-                                <Link to={v.url}> <Icon type={v.icon} theme="outlined" style={{marginRight:"5px"}}/>{v.name}</Link>
+                                <Link to={v.url}> <Icon type={v.icon} theme="outlined" style={{ marginRight: "5px" }} />{v.name}</Link>
                             </li>
                         })
                     }
@@ -50,9 +48,4 @@ class TopNav extends React.Component {
         );
     }
 }
-const mapStateToProps = () => {
-    return {
-    }
-}
-
-export default connect(mapStateToProps, dispatchAction)(TopNav)
+export default TopNav

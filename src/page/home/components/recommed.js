@@ -9,8 +9,7 @@ import homerecommend from "json/homerecommend"
 import {
     Row,
     Col,
-    Carousel,
-    Divider,
+    Carousel
 } from "antd"
 import history from "util/history"
 

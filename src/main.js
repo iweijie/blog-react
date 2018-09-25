@@ -11,7 +11,6 @@ import history from "util/history"
 // import io from "util/socket"
 import "util/observer"
 import "util/love"
-import "./style/css.css"
 
 class App extends Component {
     constructor(props, context) {

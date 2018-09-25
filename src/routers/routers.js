@@ -14,28 +14,28 @@ const AsyncHome = (props) => (
 /**
  *  文章列表
  */
-const AsyncArticleList = (props) => (
-    <Bundle load={() => import('../page/articleList/index')}>
-        {(ArticleList) => <Verification key="2"><ArticleList {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncArticleList = (props) => (
+//     <Bundle load={() => import('../page/articleList/index')}>
+//         {(ArticleList) => <Verification key="2"><ArticleList {...props} /></Verification>}
+//     </Bundle>
+// )
 
 /**
  *  新增文章
  */
-const AsyncAddArticle = (props) => (
-    <Bundle load={() => import('../page/addArticle/index')}>
-        {(AddArticle) => <Verification key="3"><AddArticle {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncAddArticle = (props) => (
+//     <Bundle load={() => import('../page/addArticle/index')}>
+//         {(AddArticle) => <Verification key="3"><AddArticle {...props} /></Verification>}
+//     </Bundle>
+// )
 /**
  *  查看文章详情
  */
-const AsyncArticleDetail = (props) => (
-    <Bundle load={() => import('../page/articleDetail/index')}>
-        {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncArticleDetail = (props) => (
+//     <Bundle load={() => import('../page/articleDetail/index')}>
+//         {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
+//     </Bundle>
+// )
 /**
  *  文章配置界面
  */
@@ -48,27 +48,27 @@ const AsyncArticleDetail = (props) => (
 /**
  *  菜单配置界面
  */
-const AsyncMenuConfig = (props) => (
-    <Bundle load={() => import('../page/configPage/menuConfig/App')}>
-        {(MenuConfig) => <Verification><MenuConfig {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncMenuConfig = (props) => (
+//     <Bundle load={() => import('../page/configPage/menuConfig/App')}>
+//         {(MenuConfig) => <Verification><MenuConfig {...props} /></Verification>}
+//     </Bundle>
+// )
 /**
  *  生活类  生活费
  */
-const AsyncLiveExpenses = (props) => (
-    <Bundle load={() => import('../page/live/expenses/index')}>
-        {(LiveExpenses) => <Verification><LiveExpenses {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncLiveExpenses = (props) => (
+//     <Bundle load={() => import('../page/live/expenses/index')}>
+//         {(LiveExpenses) => <Verification><LiveExpenses {...props} /></Verification>}
+//     </Bundle>
+// )
 /**
  *  上传界面
  */
-const AsyncUploadCom = (props) => (
-    <Bundle load={() => import('../page/upload/App')}>
-        {(UploadCom) => <Verification><UploadCom {...props} /></Verification>}
-    </Bundle>
-)
+// const AsyncUploadCom = (props) => (
+//     <Bundle load={() => import('../page/upload/App')}>
+//         {(UploadCom) => <Verification><UploadCom {...props} /></Verification>}
+//     </Bundle>
+// )
 
 /**
  *  记录类界面
@@ -94,31 +94,31 @@ export const routes = [
         exact: true,
         component: AsyncHome
     },
-    {
-        path: '/article/list/:id',
-        component: AsyncArticleList,
-        exact: true,
-    },
-    {
-        path: '/article/detail/:id',
-        component: AsyncArticleDetail,
-        exact: true,
-    },
+    // {
+    //     path: '/article/list/:id',
+    //     component: AsyncArticleList,
+    //     exact: true,
+    // },
+    // {
+    //     path: '/article/detail/:id',
+    //     component: AsyncArticleDetail,
+    //     exact: true,
+    // },
     // {
     //     path: '/config/articleConfig',
     //     component: AsyncArticleConfig,
     //     exact: true,
     // },
-    {
-        path: '/add/article',
-        component: AsyncAddArticle,
-        exact: true,
-    },
-    {
-        path: '/edit/article/:id',
-        component: AsyncAddArticle,
-        exact: true,
-    },
+    // {
+    //     path: '/add/article',
+    //     component: AsyncAddArticle,
+    //     exact: true,
+    // },
+    // {
+    //     path: '/edit/article/:id',
+    //     component: AsyncAddArticle,
+    //     exact: true,
+    // },
     // {
     //     path: '/record/:id',
     //     component: AsyncRecord,
@@ -129,21 +129,21 @@ export const routes = [
     //     component: AsyncMannerConfig,
     //     exact: true,
     // },
-    {
-        path: '/config/menu',
-        component: AsyncMenuConfig,
-        exact: true,
-    },
-    {
-        path: '/live/expenses',
-        component: AsyncLiveExpenses,
-        exact: true,
-    },
-    {
-        path: '/upload',
-        component: AsyncUploadCom,
-        exact: true,
-    },
+    // {
+    //     path: '/config/menu',
+    //     component: AsyncMenuConfig,
+    //     exact: true,
+    // },
+    // {
+    //     path: '/live/expenses',
+    //     component: AsyncLiveExpenses,
+    //     exact: true,
+    // },
+    // {
+    //     path: '/upload',
+    //     component: AsyncUploadCom,
+    //     exact: true,
+    // },
     {
         path: '/404',
         component: AsyncNoFound,

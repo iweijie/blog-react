@@ -1,5 +1,7 @@
+@import "style/css.scss";
 nav {
     height: 56px;
+    background-color: #f1f1f1;
 }
 .top-nav {
     position: relative;
@@ -10,9 +12,10 @@ nav {
     background-color: #ffffff;
     &.top-nav-fixed {
         position: fixed;
+        z-index: 10;
         top: 0;
         left: 0;
-        opacity: .5;
+        background-color: rgba(255,255,255,.8);
     }
     li {
         float: left;
@@ -24,8 +27,8 @@ nav {
             display: inline-block;
             height: 100%;
             &:hover {
-                color:#ffffff;
-                background-color: #0088f5;
+                color: #000;
+                background-color: $houverBgColor;
             }
         }
     }
