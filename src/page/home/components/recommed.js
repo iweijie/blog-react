@@ -4,16 +4,15 @@
 *参数说明:
 *时间: 2018/4/16 10:48
 */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import homerecommend from "json/homerecommend"
 import {
-    Row,
-    Col,
+    Icon,
     Carousel
 } from "antd"
 import history from "util/history"
 
-class App extends Component {
+class App extends PureComponent {
     constructor(props) {
         super(props);
     }
@@ -39,7 +38,7 @@ class App extends Component {
         this.carouselList.push(this.selectedCarousel)
         this.selectedCarousel = ""
     }
-    startLoop = (time = 3000) => {
+    startLoop = (time = 4000) => {
         this.timerId = setInterval(() => {
             this.nextCarousel()
         }, time)
@@ -62,20 +61,19 @@ class App extends Component {
             var str = "carousel" + k
             this.carouselList.push(str)
             return (
-                <div key={str} className={k === 0 ? "home-recommend margin-ms-top" : "home-recommend"}
+                <div key={str} className={"home-recommend"}
                     onMouseLeave={this.MouseLeaveHandle}
                     onMouseEnter={() => this.MouseEnterHandle(str)}>
-                    <div className="recommend-nav-title">{v.title}</div>
-                    <Carousel className="carousel-nav" ref={str} vertical>
+                    <Carousel
+                        dots={false}
+                        ref={str}
+                        vertical>
                         {
                             v.list.map((val, key) => (
-                                <Row className="carousel-item" onClick={() => this.goTo(val.path)} key={key} style={{ width: "100%" }} justify="space-between" type="flex">
-                                    <Col className="recommend-item recommend-item-title" span={6}>{val.title}</Col>
-                                    <Col className="recommend-item" span={12}>{val.discription}</Col>
-                                    <Col className="recommend-item" span={6}>{
-                                        val.tag.map((value, i) => <span key={i} className="recommend-item-tag">{value}</span>)
-                                    }</Col>
-                                </Row>
+                                <div key={key} className="whisper">
+                                    <Icon type="smile" theme="outlined" />
+                                    {val.discription}
+                                </div>
                             ))
                         }
                     </Carousel>

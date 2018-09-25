@@ -145,12 +145,3 @@ class Carousel extends PureComponent {
 }
 
 export default Carousel
-
-
-{/* <Motion onRest={() => { console.log("end ------------- 1", this.state.opcity) }} style={{ opcity: spring(this.state.opcity ? 1 : 0.1) }}>
-    {
-        ({ opcity }) => (
-            <div id="carousel" className="home-bg-img" style={{ opacity: opcity }}>111</div>
-        )
-    }
-</Motion> */}
