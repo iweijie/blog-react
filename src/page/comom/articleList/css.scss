@@ -1,3 +1,5 @@
+@import "style/css.scss";
+
 .article-list {
     margin: 0 auto;
     width: 600px;
@@ -8,12 +10,18 @@
         background-color: #fff;
         padding: 10px 10px 10px 180px;
         margin-bottom: 20px;
-        border-radius: 5px;
+        // border-radius: 5px;
         position: relative;
+
         &:last-child {
             margin-bottom: 0px;
         }
-        > h3 {
+
+        &:hover {
+            background-color: $houverBgColor;
+        }
+
+        >h3 {
             font-size: 14px;
             line-height: 20px;
             font-weight: 700;
@@ -22,6 +30,7 @@
             margin: .2rem 0 .4rem;
         }
     }
+
     .article-list-item-img {
         position: absolute;
         top: 13px;
@@ -29,28 +38,48 @@
         width: 150px;
         height: 100px;
         overflow: hidden;
-        > img {
+
+        >img {
             display: inline-block;
             width: 100%;
         }
     }
+
+    .article-list-item-text {
+        position: absolute;
+        top: 13px;
+        left: 10px;
+        width: 150px;
+        height: 100px;
+        overflow: hidden;
+        font-size: 30px;
+        font-weight: 700;
+        color: #f1f1f1;
+        line-height: 100px;
+        text-align: center;
+    }
+
     .article-list-item-descrption {
         height: 40px;
-        margin-top:.5rem;
+        margin-top: .5rem;
     }
-    .article-list-item-author{
-        > span {
+
+    .article-list-item-author {
+        >span {
             display: inline-block;
         }
     }
+
     .article-list-item-handle {
         position: absolute;
         top: 25px;
         right: 30px;
         font-size: 18px;
-        > i {
+
+        >i {
             padding: 5px;
             cursor: pointer;
+
             &:hover {
                 color: #1890ff;
             }

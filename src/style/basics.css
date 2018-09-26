@@ -341,3 +341,18 @@ ul,li,ol {
     font-family: Offline;
     src:url('../font/Offline-Rough.otf')
 }
+.img-mask {
+    position: relative;
+}
+.img-mask::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    opacity: .35;
+    background-attachment: fixed;
+    background-image: url("../images/grid.png");
+}

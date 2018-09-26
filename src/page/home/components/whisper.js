@@ -1,18 +1,12 @@
-/**
-*作者: weijie
-*功能描述: 渲染入口文件
-*参数说明:
-*时间: 2018/4/16 10:48
-*/
 import React, { PureComponent } from 'react';
-import homerecommend from "json/homerecommend"
+import whisperJson from "json/whisper"
 import {
     Icon,
     Carousel
 } from "antd"
 import history from "util/history"
 
-class App extends PureComponent {
+class Whisper extends PureComponent {
     constructor(props) {
         super(props);
     }
@@ -56,35 +50,29 @@ class App extends PureComponent {
         this.clearLoop()
     }
     render() {
-        this.carouselList = []
-        var recommend = homerecommend.map((v, k) => {
-            var str = "carousel" + k
-            this.carouselList.push(str)
-            return (
-                <div key={str} className={"home-recommend"}
-                    onMouseLeave={this.MouseLeaveHandle}
-                    onMouseEnter={() => this.MouseEnterHandle(str)}>
-                    <Carousel
-                        dots={false}
-                        ref={str}
-                        vertical>
-                        {
-                            v.list.map((val, key) => (
-                                <div key={key} className="whisper">
-                                    <Icon type="smile" theme="outlined" />
-                                    {val.discription}
-                                </div>
-                            ))
-                        }
-                    </Carousel>
-                </div>
-            )
-        })
-
-        return (
-            recommend
-        );
+        this.carouselList = [];
+        var str = "whisper";
+        this.carouselList.push(str)
+        return (<div key={str} className={"home-whisper"}>
+            <span><Icon type="star" theme="filled" />碎碎念</span>
+            <div className={"home-whisper-content"}
+                onMouseLeave={this.MouseLeaveHandle}
+                onMouseEnter={() => this.MouseEnterHandle(str)}>
+                <Carousel
+                    dots={false}
+                    ref={str}
+                    vertical>
+                    {
+                        whisperJson.map((val, key) => (
+                            <div key={key} className={"whisper"}>
+                                {val.discription}
+                            </div>
+                        ))
+                    }
+                </Carousel>
+            </div>
+        </div>)
     }
 }
 
-export default App
+export default Whisper

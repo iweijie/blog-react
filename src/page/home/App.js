@@ -2,14 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import dispatchAction from "util/dispatchAction"
-// import Carousel from "./components/carousel"
 import Bg from "./components/homeBg"
-import Carousel from "./components/smallcarousel"
 import Topnav from "../comom/topNav"
+import Recommend from "./components/recommend"
 import ArticleList from "../comom/articleList/index"
 import { throttle } from "util/baseTool"
-import Recommed from "./components/recommed"
-// import Datepicker from "./components/DatePicker"
+import Whisper from "./components/whisper"
+import Calendar from "./components/calendar"
 import "./css.scss"
 
 class App extends Component {
@@ -37,7 +36,8 @@ class App extends Component {
         this.props.homeScrollTopAction(top)
     }
     render() {
-        let { homeBgList, browserInfo, homeScrollToTop, articleList } = this.props;
+        let { homeBgList, browserInfo, homeScrollToTop, articleList,total } = this.props;
+        console.log(total)
         let isFixed = browserInfo.height - homeScrollToTop <= 56;
         const content = (
             <div ref="home" className="home">
@@ -46,13 +46,16 @@ class App extends Component {
                 <div style={{backgroundColor:"#f1f1f1"}}>
                     <div className="home-content">
                         <div className="home-content-left">
-                            <Carousel list={homeBgList}></Carousel>
-                            <Recommed></Recommed>
+                            <Whisper></Whisper>
                             <ArticleList list={articleList} />
+                            <p className="pagination">
+                                或许有更多
+                            </p>
                         </div>
                         <div className="home-content-right">
-                            right
-                    </div>
+                            <Recommend></Recommend>
+                            <Calendar changeDate={this.changeDate}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,12 +72,13 @@ const mapStateToProps = (store) => {
         homeBgList: store.homeBgList,
         browserInfo: store.browserInfo,
         homeScrollToTop: store.homeScrollToTop,
-        articleList: store.articleListModel.result
+        articleList: store.articleListModel.result,
+        total: store.articleListModel.total,
     }
 }
 
 export default connect(mapStateToProps, dispatchAction)(App)
 
-// <Datepicker changeDate={this.changeDate}/>
+// <Carousel list={homeBgList}></Carousel>
 
-{/* <Carousel list={homeBgList} browserInfo={browserInfo}></Carousel> */}
+// <Carousel list={homeBgList} browserInfo={browserInfo}></Carousel>

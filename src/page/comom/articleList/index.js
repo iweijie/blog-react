@@ -13,6 +13,14 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
     }
+    getRandomBgColor = () => {
+        var r = Math.floor(Math.random() * 256),
+            g = Math.floor(Math.random() * 256),
+            b = Math.floor(Math.random() * 256),
+            a = 1;
+        // a = Math.floor((Math.random()*.5 + .5)*10)/10;
+        return `rgba(${r},${g},${b},${a})`
+    }
     render() {
         var { list } = this.props;
         list = list || []
@@ -22,9 +30,7 @@ class App extends PureComponent {
                 {
                     list.map((data) => {
                         return <div className="article-list-item" key={data._id}>
-                            <div className="article-list-item-img">
-                                <img src="https://alpha.wallhaven.cc/wallpapers/thumb/small/th-602455.jpg" alt="" />
-                            </div>
+                            <div className="article-list-item-text img-mask" style={{ backgroundColor: this.getRandomBgColor() }}>Git</div>
                             <h3 className="article-list-item-title underline">{data.title}</h3>
                             <p className="article-list-item-descrption">{data.description}</p>
                             <div className="article-list-item-author">
@@ -56,3 +62,6 @@ class App extends PureComponent {
 
 export default App
 // onClick={() => this.onClick(data._id, data.time)}
+// <div className="article-list-item-img">
+//     <img src="https://alpha.wallhaven.cc/wallpapers/thumb/small/th-602455.jpg" alt="" />
+// </div>

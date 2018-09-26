@@ -3,7 +3,7 @@ import {articleList,articleDetials,cleararticleList,pushReview} from "actions/ar
 
 function articleListModel(state = {
     result:[],
-    totle:0
+    total:0
 }, action) {
     switch (action.type) {
         case articleList:
@@ -11,7 +11,7 @@ function articleListModel(state = {
         case cleararticleList:
             return {
                 result:[],
-                totle:0
+                total:0
             }
         default:
             return state;

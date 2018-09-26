@@ -9,7 +9,7 @@ class Bg extends PureComponent {
         let height = browserInfo.height;
         let src = list && list.length && list[0].fullUrl || ""
         return (
-            <div className="home-bg" style={{ height: (height - 56) + "px" }}>
+            <div className="home-bg img-mask" style={{ height: (height - 56) + "px" }}>
                 <div className="home-bg-img opacity-1">
                     <img src={src} alt=""/>
                 </div>
