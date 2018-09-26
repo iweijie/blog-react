@@ -9,6 +9,7 @@ import ArticleList from "../comom/articleList/index"
 import { throttle } from "util/baseTool"
 import Whisper from "./components/whisper"
 import Calendar from "./components/calendar"
+import Tags from "./components/tags"
 import "./css.scss"
 
 class App extends Component {
@@ -55,6 +56,7 @@ class App extends Component {
                         <div className="home-content-right">
                             <Recommend></Recommend>
                             <Calendar changeDate={this.changeDate}/>
+                            <Tags></Tags>
                         </div>
                     </div>
                 </div>

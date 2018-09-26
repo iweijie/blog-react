@@ -341,6 +341,7 @@ ul,li,ol {
     font-family: Offline;
     src:url('../font/Offline-Rough.otf')
 }
+/* 遮罩 */
 .img-mask {
     position: relative;
 }
@@ -355,4 +356,13 @@ ul,li,ol {
     opacity: .35;
     background-attachment: fixed;
     background-image: url("../images/grid.png");
+}
+/* 清除浮动 */
+.clearfix:after {
+    content: " ";
+    display: block;;
+    line-height: 0;
+    height: 0;
+    visibility: hidden;
+    clear: both;
 }

@@ -156,8 +156,7 @@ class Calendar extends React.PureComponent {
         })
     }
     render() {
-        let { date, changeDate } = this.props;
-        let { weekList, dateList, ymd, monthList, month, year, today } = this.state;
+        let { weekList, dateList, monthList, month, year, today } = this.state;
         let y = today[0];
         let m = today[1];
         let d = today[2];

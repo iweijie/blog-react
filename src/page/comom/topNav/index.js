@@ -22,6 +22,11 @@ class TopNav extends React.PureComponent {
             icon: "bars"
         },
         {
+            name: "设置",
+            url: "/set",
+            icon: "setting"
+        },
+        {
             name: "关于",
             url: "/about ",
             icon: "user"
