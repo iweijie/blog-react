@@ -31,6 +31,11 @@ class TopNav extends React.PureComponent {
             url: "/about ",
             icon: "user"
         },
+        {
+            name: "登入",
+            url: "/login",
+            icon: "login"
+        },
     ]
     render() {
         let { isFixed } = this.props;

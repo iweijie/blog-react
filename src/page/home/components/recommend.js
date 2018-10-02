@@ -14,8 +14,8 @@ import {
 class Recommend extends PureComponent {
     render() {
         let recommend = (
-            <div className="home-recommend">
-                <div className="home-recommend-title"><Icon type="fire" theme="filled" /> 群魔乱舞</div>
+            <div className="home-recommend unification-title">
+                <p><Icon type="fire" theme="filled" /> 群魔乱舞</p>
                 <ul>
                     {
                         recommendJson.map((v, k) => {

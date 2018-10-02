@@ -56,222 +56,6 @@ ul,li,ol {
     overflow: hidden;
 }
 
-/* 字体颜色 */
-
-.text-danger {
-    color: #ff0000;
-}
-
-.text-success {
-    color: #1890ff;
-}
-
-.text-warning {
-    color: #1890ff;
-}
-
-/* 内间距 */
-
-.padding-xm {
-    padding: 5px;
-}
-
-.padding-sm {
-    padding: 10px;
-}
-
-.padding-md {
-    padding: 20px;
-}
-
-.padding-lg {
-    padding: 40px;
-}
-
-/* 定向内间距-最小-5 */
-
-.padding-xm-left {
-    padding-left: 5px;
-}
-
-.padding-xm-top {
-    padding-top: 5px;
-}
-
-.padding-xm-right {
-    padding-right: 5px;
-}
-
-.padding-xm-bottom {
-    padding-bottom: 5px;
-}
-
-/* 定向内间距-小-10 */
-
-.padding-sm-left {
-    padding-left: 10px;
-}
-
-.padding-sm-top {
-    padding-top: 10px;
-}
-
-.padding-sm-right {
-    padding-right: 10px;
-}
-
-.padding-sm-bottom {
-    padding-bottom: 10px;
-}
-
-/* 定向内间距-中-20 */
-
-.padding-md-left {
-    padding-left: 20px;
-}
-
-.padding-md-top {
-    padding-top: 20px;
-}
-
-.padding-md-right {
-    padding-right: 20px;
-}
-
-.padding-md-bottom {
-    padding-bottom: 20px;
-}
-
-/* 定向内间距-大-40 */
-
-.padding-lg-left {
-    padding-left: 40px;
-}
-
-.padding-lg-top {
-    padding-top: 40px;
-}
-
-.padding-lg-right {
-    padding-right: 40px;
-}
-
-.padding-lg-bottom {
-    padding-bottom: 40px;
-}
-
-/* 外间距 */
-
-.margin-xm {
-    margin: 5px;
-}
-
-.margin-sm {
-    margin: 10px;
-}
-
-.margin-md {
-    margin: 20px;
-}
-
-.margin-lg {
-    margin: 40px;
-}
-
-.margin-xs-top-bottom {
-    margin: 5px 0;
-}
-
-.margin-ss-left {
-    margin-left: 10px;
-}
-
-.margin-sm-left {
-    margin-left: 15px;
-}
-
-.margin-md-left {
-    margin-left: 20px;
-}
-
-.margin-ss-right {
-    margin-right: 10px;
-}
-
-.margin-sm-right {
-    margin-right: 15px;
-}
-
-.margin-ms-right {
-    margin-right: 20px;
-}
-
-.margin-ss-top {
-    margin-top: 10px;
-}
-
-.margin-sm-top {
-    margin-top: 15px;
-}
-
-.margin-ms-top {
-    margin-top: 20px;
-}
-
-.margin-md-top {
-    margin-top: 25px;
-}
-
-.margin-ss-bottom {
-    margin-bottom: 10px;
-}
-
-.margin-sm-bottom {
-    margin-bottom: 15px;
-}
-
-.margin-ms-bottom {
-    margin-bottom: 20px;
-}
-
-.position-relative {
-    position: relative;
-}
-
-.position-absolute {
-    position: absolute;
-}
-
-/* 左右浮动 */
-
-.pull-left {
-    float: left;
-}
-
-.pull-right {
-    float: right;
-}
-
-.ant-layout {
-    background: none !important;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.display-none {
-    display: none
-}
-
 /* 超出省略显示 */
 
 .ellipsis {
@@ -290,8 +74,9 @@ ul,li,ol {
     left: 0;
     bottom: -4px;
     width: 100%;
-    height: 2px;
-    background: rgba(68,68,68,.5);
+    height: 1px;
+    /* background: rgba(68,68,68,.1); */
+    background-color: #ffffff;
     transition: transform .5s;
     transform: scaleX(0);
     transform-origin: 100% 0;
@@ -326,15 +111,30 @@ ul,li,ol {
 .fr {
     float: right;
 }
+.mr10 {
+    margin-right: 10px;
+}
+.mt20 {
+    margin-top: 20px;
+}
 .mr20 {
     margin-right: 20px;
 }
-
+.mb20 {
+    margin-bottom: 20px;
+}
 .ml20 {
     margin-left: 20px;
 }
-.mr10 {
-    margin-right: 10px;
+
+.pr5 {
+    padding-right: 5px;
+}
+.pr10 {
+    padding-right: 10px;
+}
+.display-none {
+    display: none;
 }
 
 @font-face {

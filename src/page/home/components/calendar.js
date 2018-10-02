@@ -30,7 +30,6 @@ class Calendar extends React.PureComponent {
         this.props.changeDate(ymd.join('-'))
         let { calendarheader, calendar_t, calendar } = this.refs;
         if (!calendarheader || !calendar_t || !calendar) return;
-
     }
     setYMD =(date)=> {   //设置年月日
         date = date || new Date();

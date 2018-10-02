@@ -1,7 +1,8 @@
 import axios from "util/axios"
 import config from "config"
 import { message } from "antd"
-export const articleList = "articleList"
+export const appendArticleList = "appendArticleList"
+export const replaceArticleList = "replaceArticleList"
 export const cleararticleList = "cleararticleList"
 export const articleDetials = "articleDetials"
 export const articlesubmit = "articlesubmit"
@@ -11,16 +12,22 @@ export const pushReview = "pushReview"
 const clearArticleListAction = () => ({
     type: cleararticleList
 })
-// 文章列表
-const articleListAction = value => ({
-    type: articleList,
+// 文章列表(替换)
+const replaceArticleListAction = value => ({
+    type: replaceArticleList,
     payload: value
 })
-const getArticleListAsync = (params) => (dispatch) => {
+// 文章列表(追加)
+const appendArticleListAction = value => ({
+    type: appendArticleList,
+    payload: value
+})
+// 默认追加模式
+const getArticleListAsync = (params,pattern) => (dispatch) => {
     return axios.get(`${config.basicsUrl}/api/article/list`, {params})
         .then(data => {
             if (data.state == 1) {
-                dispatch(articleListAction(data))
+                pattern ? dispatch(replaceArticleListAction(data)) : dispatch(appendArticleListAction(data));
                 return data
             }
         }).catch(e => {
@@ -99,7 +106,8 @@ const asyncArticlTime = (params) => () => {
 
 export default {
     clearArticleListAction,
-    articleListAction,
+    appendArticleListAction,
+    replaceArticleListAction,
     getArticleListAsync,
     articleDetailsAction,
     getArticleDetails,

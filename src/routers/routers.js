@@ -31,11 +31,11 @@ const AsyncHome = (props) => (
 /**
  *  查看文章详情
  */
-// const AsyncArticleDetail = (props) => (
-//     <Bundle load={() => import('../page/articleDetail/index')}>
-//         {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
-//     </Bundle>
-// )
+const AsyncArticleDetail = (props) => (
+    <Bundle load={() => import('../page/articleDetail/index')}>
+        {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
+    </Bundle>
+)
 /**
  *  文章配置界面
  */
@@ -79,6 +79,14 @@ const AsyncHome = (props) => (
 //     </Bundle>
 // )
 /**
+ *  登入
+ */
+const AsyncLogin = (props) => (
+    <Bundle load={() => import('../page/login/index')}>
+        {(Login) => <Verification><Login {...props} /></Verification>}
+    </Bundle>
+)
+/**
  *  404
  */
 const AsyncNoFound = (props) => (
@@ -99,11 +107,11 @@ export const routes = [
     //     component: AsyncArticleList,
     //     exact: true,
     // },
-    // {
-    //     path: '/article/detail/:id',
-    //     component: AsyncArticleDetail,
-    //     exact: true,
-    // },
+    {
+        path: '/article/detail/:id',
+        component: AsyncArticleDetail,
+        exact: true,
+    },
     // {
     //     path: '/config/articleConfig',
     //     component: AsyncArticleConfig,
@@ -144,6 +152,11 @@ export const routes = [
     //     component: AsyncUploadCom,
     //     exact: true,
     // },
+    {
+        path: '/login',
+        component: AsyncLogin,
+        exact: true,
+    },
     {
         path: '/404',
         component: AsyncNoFound,

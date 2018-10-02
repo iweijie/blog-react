@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     Form,
     Input,
@@ -12,7 +12,7 @@ import {
 const FormItem = Form.Item;
 const { TextArea } = Input
 
-class App extends Component {
+class App extends PureComponent {
     constructor(props) {
         super(props);
     }

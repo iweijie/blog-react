@@ -1,14 +1,21 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Aside extends Component {
+class Aside extends PureComponent {
+    body = null
     gotoDom = (id) => {
         var element = document.getElementById(id);
-        element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        window.scrollTo({
+            top:element.offsetTop-56,
+            behavior: "smooth"
+        })
+    }
+    scrollHandle = ()=>{
+
     }
     getNav = (arr, level = 1, per = "") => {
         var className = "articl-aside-level-" + level
-        return <ul className="articl-aside-ul">
+        return <ol className="articl-aside-ol">
             {
                 arr.map((v, k) => {
                     return (<li key={v.id}>
@@ -26,12 +33,11 @@ class Aside extends Component {
                     </li>)
                 })
             }
-        </ul>
+        </ol>
     }
     render() {
         var { nav } = this.props
         var child = nav ? this.getNav(nav) : null
-        // var className = isShow && nav ? "articl-aside" : "articl-aside none"
         return (
             <div className="articl-aside">
                 {child}

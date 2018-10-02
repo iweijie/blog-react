@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { timestampFromat } from "util/baseTool"
 import {
     Form,
@@ -11,7 +11,7 @@ import {
 
 const FormItem = Form.Item;
 const { TextArea } = Input
-class App extends Component {
+class App extends PureComponent {
     constructor(props) {
         super(props);
     }
@@ -85,10 +85,10 @@ class App extends Component {
         var { replyIndex, replyName } = this.state
         var name = localStorage.getItem("leaveName")
         var replyInput = (
-            <div style={{ padding: "20px" }}>
+            <div style={replyIndex !== null ? { padding: "20px 0" } : null}>
                 {
                     replyName ?
-                        <div>回复：{replyName} </div>
+                        <div>回复：<span className="green">{replyName}</span></div>
                         : null
                 }
                 <Form className="form-select">
@@ -106,7 +106,7 @@ class App extends Component {
                         <Col span={24} style={{ position: "relative" }}>
                             <FormItem>
                                 {getFieldDecorator('leave')(
-                                    <TextArea maxLength="400" rows={3} placeholder="评论留言区，请轻喷" />
+                                    <TextArea maxLength="150" rows={3} placeholder="评论留言区，请轻喷" />
                                 )}
                             </FormItem>
                         </Col>
@@ -136,10 +136,11 @@ class App extends Component {
                             decodeURIComponent(v.content)
                         }
                     </span>
-                    ——<span className="green"> {v.name} </span>
+                    —
+                    <span className="green mr10"> {v.name} </span>
                     <span>{timestampFromat(v.createTime)}</span>
                     {
-                        v.userId === userInfo.userId || (!userInfo.isLogin && name === v.name) ? null :
+                        (userInfo.userId && v.userId === userInfo.userId) || (!userInfo.isLogin && name === v.name) ? null :
                             <span className="reply" onClick={() => this.reply(k, v.name, v.userId)}>
                                 回复
                                 </span>

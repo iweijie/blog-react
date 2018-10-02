@@ -1,12 +1,13 @@
 /**
 *作者: weijie
-*功能描述: 渲染入口文件
+*功能描述: 文章列表展示
 *参数说明:
 *时间: 2018/4/16 10:48
 */
 import React, { PureComponent } from 'react';
 import { Icon } from "antd"
 import { timestampFromat } from "util/baseTool"
+import history from "util/history"
 import "./css.scss"
 
 class App extends PureComponent {
@@ -21,6 +22,10 @@ class App extends PureComponent {
         // a = Math.floor((Math.random()*.5 + .5)*10)/10;
         return `rgba(${r},${g},${b},${a})`
     }
+    goTo=(id)=>{
+        if(!id) return
+        history.push("/article/detail/" + id)
+    }
     render() {
         var { list } = this.props;
         list = list || []
@@ -31,22 +36,22 @@ class App extends PureComponent {
                     list.map((data) => {
                         return <div className="article-list-item" key={data._id}>
                             <div className="article-list-item-text img-mask" style={{ backgroundColor: this.getRandomBgColor() }}>Git</div>
-                            <h3 className="article-list-item-title underline">{data.title}</h3>
+                            <h3 className="article-list-item-title underline" onClick={()=>this.goTo(data._id)}>{data.title}</h3>
                             <p className="article-list-item-descrption">{data.description}</p>
                             <div className="article-list-item-author">
-                                <span className="margin-ms-right">
-                                    <Icon className="padding-xm-right" type="user" />
+                                <span className="mr10">
+                                    <Icon className="pr5" type="user" />
                                     {data.autor && data.autor.name}
                                 </span>
-                                <span className="margin-ms-right">
-                                    <Icon className="padding-xm-right" type="calendar" />
+                                <span className="mr10">
+                                    <Icon className="pr5" type="calendar" />
                                     {timestampFromat(data.createTime)}
                                 </span>
-                                <span className="article-list-item-tag margin-ms-right">
-                                    <Icon type="tag-o" className="padding-xm-right" />
-                                    {data.classify}
+                                <span className="article-list-item-tag mr10">
+                                    <Icon type="tag-o" className="pr5" />
+                                    {data.tags && data.tags.join("，")}
                                 </span>
-                                <span><Icon className="padding-xm-right" type="eye-o" />{data.time}</span>
+                                <span><Icon className="pr5" type="eye-o" />{data.time}</span>
                             </div>
                         </div>
                     })

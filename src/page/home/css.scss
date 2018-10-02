@@ -52,27 +52,20 @@
         }
     }
 }
-
 .home-content {
     background-color: #f1f1f1;
     padding: 20px 0;
-    position: relative;
     width: 900px;
     margin: 0 auto;
+    display: flex;
 
     .home-content-left {
-        padding-right: 300px;
-        width: 100%;
+        width: 600px;
     }
 
     .home-content-right {
-        position: absolute;
-        padding-top: 20px;
-        top: 0;
-        right: 0;
         width: 300px;
         padding-left: 20px;
-        height: 100%;
     }
 }
 
@@ -116,7 +109,21 @@
         width: 100%;
     }
 }
-
+.unification-title {
+    >p {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px dashed #e1e1e1;
+        background-color: #fff;
+        padding:0 10px ;
+        margin: 0;
+        > i {
+            color: red;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+    }
+}
 .calendar {
     * {
         margin: 0;
@@ -194,19 +201,9 @@
 .home-recommend {
     margin-bottom: 20px;
     background-color: #ffffff;
-    padding: 0 10px;
     font-size: 14px ;
-    .home-recommend-title {
-        height: 40px;
-        line-height: 40px;
-        border-bottom:1px dashed #e1e1e1;
-        i {
-            color:red;
-            margin-right: 5px;
-        }
-    }
     ul {
-        padding: 10px 0;
+        padding: 10px;
         margin: 0;
     }
     li {
@@ -247,9 +244,12 @@
     &:hover {
         background-color: $houverBgColor;
     }
+    &.disabled {
+        background-color: #e1e1e1;
+        cursor:not-allowed;
+    }
 }
 .home-tags {
-    margin-top: 20px;
     line-height: 20px;
     background-color: #fff;
     padding: 10px 10px 0;

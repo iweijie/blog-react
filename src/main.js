@@ -4,6 +4,8 @@ import { Router, Switch, Route } from 'react-router-dom'
 import { routes } from './routers/routers'
 import { throttle } from "util/baseTool"
 import dispatchAction from "util/dispatchAction"
+// import AnimatedRouter from 'react-animated-router';
+// import 'react-animated-router/animate.css';
 // import Menu from "page/leftMenu"
 // import Login from "page/login"
 // import Topnav from "page/topNav"
