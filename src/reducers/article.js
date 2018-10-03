@@ -3,7 +3,9 @@ import {
     replaceArticleList,
     articleDetials,
     cleararticleList,
-    pushReview
+    pushReview,
+    tagsList,
+    currentTag
 } from "actions/article"
 function articleListModel(state = {
     result: [],
@@ -39,8 +41,25 @@ function articleDetialsModel(state = {}, action) {
             return state;
     }
 }
-
+function tagsListModel(state = [],action){
+    switch (action.type) {
+        case tagsList:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+function getCurrentTag(state = "",action){
+    switch (action.type) {
+        case currentTag:
+            return action.payload;
+        default:
+            return state;
+    }
+}
 export default {
     articleListModel,
-    articleDetialsModel
+    articleDetialsModel,
+    tagsListModel,
+    getCurrentTag
 }

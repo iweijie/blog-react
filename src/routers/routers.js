@@ -102,6 +102,11 @@ export const routes = [
         exact: true,
         component: AsyncHome
     },
+    {
+        path: '/tags/:id',
+        exact: true,
+        component: AsyncHome
+    },
     // {
     //     path: '/article/list/:id',
     //     component: AsyncArticleList,

@@ -22,8 +22,8 @@ class App extends PureComponent {
         // a = Math.floor((Math.random()*.5 + .5)*10)/10;
         return `rgba(${r},${g},${b},${a})`
     }
-    goTo=(id)=>{
-        if(!id) return
+    goTo = (id) => {
+        if (!id) return
         history.push("/article/detail/" + id)
     }
     render() {
@@ -34,9 +34,18 @@ class App extends PureComponent {
             <div className="article-list">
                 {
                     list.map((data) => {
+                        let tag = data.tags[0] && data.tags[0].toUpperCase() || "JS"
                         return <div className="article-list-item" key={data._id}>
-                            <div className="article-list-item-text img-mask" style={{ backgroundColor: this.getRandomBgColor() }}>Git</div>
-                            <h3 className="article-list-item-title underline" onClick={()=>this.goTo(data._id)}>{data.title}</h3>
+                            {
+                                data.img ?
+                                    <div className="article-list-item-img">
+                                        <img src={data.img} alt="" />
+                                    </div>
+                                    :
+                                    <div className="article-list-item-text img-mask" style={{ backgroundColor: this.getRandomBgColor() }}>{tag}</div>
+                            }
+
+                            <h3 className="article-list-item-title underline" onClick={() => this.goTo(data._id)}>{data.title}</h3>
                             <p className="article-list-item-descrption">{data.description}</p>
                             <div className="article-list-item-author">
                                 <span className="mr10">
@@ -67,6 +76,8 @@ class App extends PureComponent {
 
 export default App
 // onClick={() => this.onClick(data._id, data.time)}
-// <div className="article-list-item-img">
-//     <img src="https://alpha.wallhaven.cc/wallpapers/thumb/small/th-602455.jpg" alt="" />
-// </div>
+{/* <div className="article-list-item-img">
+    <img src="https://alpha.wallhaven.cc/wallpapers/thumb/small/th-602455.jpg" alt="" />
+</div> */}
+
+{/* <div className="article-list-item-text img-mask" style={{ backgroundColor: this.getRandomBgColor() }}>{tag}</div> */ }

@@ -33,9 +33,9 @@
     z-index: 20;
     width: 300px;
     height: 100%;
-    padding-top: 76px;
+    padding-top: 20px;
     // box-shadow: inset 0 2px 6px  rgba(34,34,34,1);
-    background-color:  rgba(34,34,34,.8);
+    background-color:  #222;
     transition:right .5s linear;
 }
 .article-detail-content {
@@ -112,14 +112,42 @@
         color: #009a61;
     }
 }
+.articl-aside-title {
+    color:#999;
+    font-size: 14px;
+    width: 140px;
+    margin: 0 auto;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 20px;
+    span {
+        display: inline-block;
+        cursor: pointer;
+        &:first-child {
+            margin-right: 25px;
+        }
+        &.active {
+            color:#fff;
+            text-decoration: underline #fff;
+        }
+        &:hover {
+            text-decoration: underline #fff;
+            color:#fff;
+        }
+    }
+    
+
+}
 .articl-aside-ol {
-    color:#e1e1e1;
+    color:#999;
     padding: 0 20px;
+    transition: all 500ms ease-in;
     .articl-aside-name {
         display: inline;
         cursor: pointer;
         &:hover {
             text-decoration: underline #fff;
+            color:#fff;
         }
     }
     p {
@@ -137,29 +165,31 @@
         width: 30px;
         height: 30px;
         line-height: 30px;
-        margin-bottom: 1.5em;
+        margin-bottom: 1rem;
         background-color: #222;
         border-radius: 4px;
         cursor: pointer;
+        box-shadow: inset 0 0 1px 1px  rgba(255,251,240,.2);
     }
     .goBack {
         width: 30px;
         height: 30px;
         line-height: 30px;
-        margin-bottom: 1.5em;
+        margin-bottom: 1rem;
         background-color: #222;
         border-radius: 4px;
         cursor: pointer;
+        box-shadow: inset 0 0 1px 1px  rgba(255,251,240,.2);
     }
     .toggle {
         width: 30px;
         height: 30px;
         line-height: 30px;
-        margin-bottom: 1.5em;
         background-color: #222;
         border-radius: 4px;
         position: relative;
         cursor: pointer;
+        box-shadow: inset 0 0 1px 1px  rgba(255,251,240,.2);
         li {
             position: absolute;
             top: 0;
@@ -220,3 +250,48 @@
         width: 96%;
     }
 }
+
+.articl-aside-user {
+    line-height: 32px;
+    .author-image {
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        border-radius:50%;
+        border: 2px solid #fff;
+    }
+    .author-name {
+        font-size: 24px;
+        margin: 5px 0 0;
+        text-align: center;
+        color: #f5f5f5;
+        font-weight: normal;    
+        font-family: Offline,'PingFang SC','Microsoft YaHei',sans-serif;
+    }
+    .author-describe {
+        text-align: center;
+        color:#fff;
+    }
+}
+
+/* tab动态增加动画 */
+.message-enter {
+    opacity: 0.01;
+    transform: translateY(-10%);
+  }
+.message-enter-active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 300ms ease-out;
+}
+.message-exit {
+    opacity: 1;
+    transform: translateY(0%);
+}
+.message-exit-active {
+    opacity: 0.01;
+    transform: translateY(-10%);
+    transition: all 300ms ease-out;
+}
+  

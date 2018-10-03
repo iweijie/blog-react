@@ -1,16 +1,20 @@
 
 import React, { PureComponent } from 'react';
-import tagsJson from "json/tags"
+import history from "util/history"
 class Tags extends PureComponent {
     constructor(props) {
         super(props);
     }
+    goTo = (id)=>{
+        history.push("/tags/" + id)
+    }
     render() {
+        let {list } = this.props
         return (
             <ul className="home-tags clearfix">
                 {
-                    tagsJson.map(v => {
-                        return <li key={v.id}>{v.tagname} <span>[{v.sum}]</span></li>
+                    list.map(v => {
+                        return <li onClick={()=>this.goTo(v.tagCode)} key={v.tagCode}>{v.tagName} <span>[{v.count}]</span></li>
                     })
                 }
             </ul>

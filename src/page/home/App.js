@@ -19,40 +19,89 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
-    state = {
-    }
+    flag = true
     page = 1
     pageSize = 10
     UNSAFE_componentWillMount() {
-        let {page,pageSize} = this
-        let {homeBgList,articleList,total} = this.props;
-        if(!homeBgList || !homeBgList.length){
-            this.props.getHomeBgImageActionASync()
+        this.init(this.props)
+    }
+    init = (params) => {
+        let { homeBgList, asyncGetTagsList, tags } = params;
+        if (!homeBgList || !homeBgList.length) {
+            params.getHomeBgImageActionASync()
         }
-        if(!total || !articleList || !articleList.length){
-            this.props.getArticleListAsync({
-                page,pageSize
+        if (!tags || !tags.length) {
+            asyncGetTagsList()
+        }
+        this.getArticleList(params)
+    }
+    getArticleList = (params) => {
+        let { articleList, total, match, currentTag ,setCurrentTag} = params;
+        let id = match.params.id;
+        let { page, pageSize ,flag} = this
+        if (flag && ((id && id !== currentTag) || (id === undefined && currentTag))) {
+            this.flag = false
+            let params = { page: 1, pageSize }
+            setCurrentTag(id || "")
+            this.page = 1;
+            if (id) {
+                params.tag = id
+            }
+            this.props.getArticleListAsync(params, true)
+            .then(()=>{
+                this.flag = true
             })
-        }else {
-            this.page = Math.ceil(articleList.length/pageSize)
+            .catch(()=>{
+                this.flag = true
+            })
+        } else {
+            if (flag && (!total || !articleList || !articleList.length)) {
+                this.flag = false
+                setCurrentTag(id || "")
+                let params = {
+                    page, pageSize
+                }
+                if (id) {
+                    params.tag = id
+                }
+                this.props.getArticleListAsync(params, true)
+                .then(()=>{
+                    this.flag = true
+                })
+                .catch(()=>{
+                    this.flag = true
+                })
+            } else {
+                this.page = Math.ceil(articleList.length / pageSize)
+            }
         }
     }
     changeDate = (time) => {
         console.log(time)
     }
-    pagination = (total)=>{
-        let {page,pageSize} = this;
-        let max = Math.ceil(total/pageSize);
-        if(max <= page) return ;
+    pagination = (total) => {
+        let { page, pageSize } = this;
+        let max = Math.ceil(total / pageSize);
+        if (max <= page) return;
         this.props.getArticleListAsync({
-            page: ++this.page ,pageSize
+            page: ++this.page, pageSize
         })
     }
     componentDidMount() {
-        window.addEventListener("scroll",this.scroll)
+        window.addEventListener("scroll", this.scroll)
     }
     componentWillUnmount() {
-        window.removeEventListener("scroll",this.scroll)
+        window.removeEventListener("scroll", this.scroll)
+    }
+    componentWillReceiveProps(next) {
+        let { match } = next;
+        let id = match.params.id;
+        if (next.userInfo !== this.props.userInfo) {
+            this.init(next)
+        }
+        if (id !== this.tag) {
+            this.getArticleList(next)
+        }
     }
     scrollHandle = () => {
         let top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -60,8 +109,8 @@ class App extends Component {
     }
     scroll = throttle(this.scrollHandle, 100);
     render() {
-        let { homeBgList, browserInfo, homeScrollToTop, articleList, total } = this.props;
-        let {page,pageSize} = this
+        let { homeBgList, browserInfo, homeScrollToTop, articleList, total, tags } = this.props;
+        let { page, pageSize } = this
         let isFixed = browserInfo.height - homeScrollToTop <= 56;
         const content = (
             <div ref="home" className="home">
@@ -73,13 +122,13 @@ class App extends Component {
                             <Whisper></Whisper>
                             <ArticleList list={articleList} />
                             {
-                                total && total > (page*pageSize) ?
-                                <p className="pagination" onClick={()=>this.pagination(total)}>
-                                    或许有更多
+                                total && total > (page * pageSize) ?
+                                    <p className="pagination" onClick={() => this.pagination(total)}>
+                                        或许有更多
                                 </p>
-                                :
-                                <p className="pagination disabled">
-                                    这是我的底线
+                                    :
+                                    <p className="pagination disabled">
+                                        这是我的底线
                                 </p>
                             }
                         </div>
@@ -92,7 +141,7 @@ class App extends Component {
 
                             <div className="unification-title ">
                                 <p><Icon type="read" theme="filled" /> 标签</p>
-                                <Tags></Tags>
+                                <Tags list={tags}></Tags>
                             </div>
                         </div>
                     </div>
@@ -113,6 +162,8 @@ const mapStateToProps = (store) => {
         homeScrollToTop: store.homeScrollToTop,
         articleList: store.articleListModel.result,
         total: store.articleListModel.total,
+        tags: store.tagsListModel,
+        currentTag: store.getCurrentTag,
     }
 }
 
