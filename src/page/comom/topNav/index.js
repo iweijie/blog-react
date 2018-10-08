@@ -16,11 +16,11 @@ class TopNav extends React.PureComponent {
             url: "/",
             icon: "home"
         },
-        {
-            name: "分类",
-            url: "/classify",
-            icon: "bars"
-        },
+        // {
+        //     name: "分类",
+        //     url: "/classify",
+        //     icon: "bars"
+        // },
         {
             name: "设置",
             url: "/set",

@@ -5,7 +5,7 @@ import Verification from "page/comom/Verification"
 
 /**
  * 首页
-*/
+ */
 const AsyncHome = (props) => (
     <Bundle load={() => import('../page/home/App')}>
         {(Home) => <Verification key="1"><Home {...props} /></Verification>}
@@ -32,7 +32,7 @@ const AsyncHome = (props) => (
  *  查看文章详情
  */
 const AsyncArticleDetail = (props) => (
-    <Bundle load={() => import('../page/articleDetail/index')}>
+    <Bundle load={() => import('../page/articleDetail')}>
         {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
     </Bundle>
 )
@@ -82,8 +82,18 @@ const AsyncArticleDetail = (props) => (
  *  登入
  */
 const AsyncLogin = (props) => (
-    <Bundle load={() => import('../page/login/index')}>
+    <Bundle load={() => import('../page/login')}>
         {(Login) => <Verification><Login {...props} /></Verification>}
+    </Bundle>
+)
+
+/**
+ * 设置界面
+ */
+const AsyncSet = (props) => (
+    <Bundle load={() => import('../page/set')}>
+        {/* {(Setting) => <Setting {...props} />} */}
+        {(Setting) => <Verification><Setting {...props} /></Verification>}
     </Bundle>
 )
 /**
@@ -107,60 +117,19 @@ export const routes = [
         exact: true,
         component: AsyncHome
     },
-    // {
-    //     path: '/article/list/:id',
-    //     component: AsyncArticleList,
-    //     exact: true,
-    // },
     {
         path: '/article/detail/:id',
         component: AsyncArticleDetail,
         exact: true,
     },
-    // {
-    //     path: '/config/articleConfig',
-    //     component: AsyncArticleConfig,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/add/article',
-    //     component: AsyncAddArticle,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/edit/article/:id',
-    //     component: AsyncAddArticle,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/record/:id',
-    //     component: AsyncRecord,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/config/manner',
-    //     component: AsyncMannerConfig,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/config/menu',
-    //     component: AsyncMenuConfig,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/live/expenses',
-    //     component: AsyncLiveExpenses,
-    //     exact: true,
-    // },
-    // {
-    //     path: '/upload',
-    //     component: AsyncUploadCom,
-    //     exact: true,
-    // },
     {
         path: '/login',
         component: AsyncLogin,
         exact: true,
+    },
+    {
+        path: '/set',
+        component: AsyncSet,
     },
     {
         path: '/404',

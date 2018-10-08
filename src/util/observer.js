@@ -65,6 +65,6 @@ const Observer = (function () {
 
 const observer = new Observer()
 
-observer.Observer = Observer
+observer.factory = Observer
 
 export default observer

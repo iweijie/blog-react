@@ -72,9 +72,6 @@ class App extends Component {
     }
     handleCancel = () => {
         document.removeEventListener("keydown", this.enterHandler)
-        this.setState({
-            visible: false
-        })
     }
     render() {
 
@@ -82,9 +79,6 @@ class App extends Component {
         var isLogin = this.props.userInfo.isLogin
         const content = (
             <div className={isLogin ? "login hide" : "login"}>
-                <div onClick={this.show} className="loginbtn">
-                    登入
-                        </div>
                 <Modal
                     width={348}
                     className="login-modal"
