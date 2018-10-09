@@ -20,6 +20,7 @@ class App extends Component {
     }
     UNSAFE_componentWillMount(){
         this.props.syncuserInfoCheckAction()
+        this.props.getHomeBgImageActionASync()
     }
     componentDidMount() {
         window.addEventListener("resize", throttle(() => {

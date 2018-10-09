@@ -5,6 +5,7 @@ import {
     cleararticleList,
     pushReview,
     tagsList,
+    detailTagsList,
     currentTag
 } from "actions/article"
 function articleListModel(state = {
@@ -49,6 +50,15 @@ function tagsListModel(state = [],action){
             return state;
     }
 }
+function tagsDetailListModel(state = [],action){
+    switch (action.type) {
+        case detailTagsList:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 function getCurrentTag(state = "",action){
     switch (action.type) {
         case currentTag:
@@ -61,5 +71,6 @@ export default {
     articleListModel,
     articleDetialsModel,
     tagsListModel,
-    getCurrentTag
+    getCurrentTag,
+    tagsDetailListModel
 }

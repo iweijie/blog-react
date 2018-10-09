@@ -36,46 +36,13 @@ const AsyncArticleDetail = (props) => (
         {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
     </Bundle>
 )
-/**
- *  文章配置界面
- */
-// const AsyncArticleConfig = (props) => (
-//     <Bundle load={() => import('../page/configPage/articleconfig/App')}>
-//         {(ArticleConfig) => <Verification key="5"><ArticleConfig {...props} /></Verification>}
-//     </Bundle>
-// )
 
-/**
- *  菜单配置界面
- */
-// const AsyncMenuConfig = (props) => (
-//     <Bundle load={() => import('../page/configPage/menuConfig/App')}>
-//         {(MenuConfig) => <Verification><MenuConfig {...props} /></Verification>}
-//     </Bundle>
-// )
-/**
- *  生活类  生活费
- */
-// const AsyncLiveExpenses = (props) => (
-//     <Bundle load={() => import('../page/live/expenses/index')}>
-//         {(LiveExpenses) => <Verification><LiveExpenses {...props} /></Verification>}
-//     </Bundle>
-// )
 /**
  *  上传界面
  */
 // const AsyncUploadCom = (props) => (
 //     <Bundle load={() => import('../page/upload/App')}>
 //         {(UploadCom) => <Verification><UploadCom {...props} /></Verification>}
-//     </Bundle>
-// )
-
-/**
- *  记录类界面
- */
-// const AsyncRecord = (props) => (
-//     <Bundle load={() => import('../page/record/index')}>
-//         {(Record) => <Verification><Record {...props} /></Verification>}
 //     </Bundle>
 // )
 /**
@@ -86,7 +53,14 @@ const AsyncLogin = (props) => (
         {(Login) => <Verification><Login {...props} /></Verification>}
     </Bundle>
 )
-
+/**
+ * 碎碎念
+ */
+const AsyncSelftalking = (props) => (
+    <Bundle load={() => import('../page/selftalking')}>
+        {(Selftalking) => <Verification><Selftalking {...props} /></Verification>}
+    </Bundle>
+)
 /**
  * 设置界面
  */
@@ -116,6 +90,11 @@ export const routes = [
         path: '/tags/:id',
         exact: true,
         component: AsyncHome
+    },
+    {
+        path: '/selftalking',
+        exact: true,
+        component: AsyncSelftalking
     },
     {
         path: '/article/detail/:id',

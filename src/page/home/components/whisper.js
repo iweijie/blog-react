@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import whisperJson from "json/whisper"
+import { Link } from 'react-router-dom'
 import {
     Icon,
     Carousel
@@ -54,7 +55,7 @@ class Whisper extends PureComponent {
         var str = "whisper";
         this.carouselList.push(str)
         return (<div key={str} className={"home-whisper"}>
-            <span><Icon type="star" theme="filled" />碎碎念</span>
+            <Link to="/selftalking"><Icon type="star" theme="filled" />碎碎念</Link>
             <div className={"home-whisper-content"}
                 onMouseLeave={this.MouseLeaveHandle}
                 onMouseEnter={() => this.MouseEnterHandle(str)}>

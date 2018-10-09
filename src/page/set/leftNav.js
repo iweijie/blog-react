@@ -17,7 +17,7 @@ class Left extends Component {
         },
         {
             name: "标签",
-            path: "/set/tags/add",
+            path: "/set/tags",
             icon: "book"
         },
         {

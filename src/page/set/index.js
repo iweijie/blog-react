@@ -6,8 +6,9 @@ import Topnav from "../comom/topNav"
 import LeftNav from "./leftNav"
 import { Switch, Route, Redirect } from 'react-router-dom'
 import {
-    AsyncArticle
-} from "./components"
+    AsyncArticle,
+    AsyncTags
+} from "./routers"
 import "./css.scss"
 
 
@@ -16,7 +17,7 @@ class App extends Component {
         super(props);
     }
     render() {
-        let {height} = this.props.browserInfo
+        let { height } = this.props.browserInfo
         let url = "/set";
         const content = (
             <div ref="set" className="set">
@@ -25,10 +26,13 @@ class App extends Component {
                     <div className="set-left">
                         <LeftNav />
                     </div>
-                    <div className="set-right" style={{minHeight:height-56-40+"px"}}>
-                        <Route key="AsyncArticleAdd" exact path={`${url}/article/add`} component={AsyncArticle} />
-                        <Route key="AsyncArticleEdit" exact path={`${url}/article/edit/:id`} component={AsyncArticle} />
-                        <Route key="test" exact path={`${url}/test`} render={() => <div>123</div>} />
+                    <div className="set-right" style={{ minHeight: height - 56 - 40 + "px" }}>
+                        <Switch>
+                            <Route key="test" exact path={`${url}/test`} render={() => <div>123</div>} />
+                            <Route key="AsyncArticleAdd" exact path={`${url}/article/add`} component={AsyncArticle} />
+                            <Route key="AsyncArticleEdit" exact path={`${url}/article/edit/:id`} component={AsyncArticle} />
+                            <Route key="Asynctags" exact path={`${url}/tags`} component={AsyncTags} />
+                        </Switch>
                     </div>
                 </div>
             </div>

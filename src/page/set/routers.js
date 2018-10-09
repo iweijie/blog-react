@@ -9,3 +9,11 @@ export const AsyncArticle = (props) => (
         {(Article) => <Article {...props} />}
     </Bundle>
 )
+/**
+ * 标签列表
+ */
+export const AsyncTags = (props) => (
+    <Bundle load={() => import('./tags/index')}>
+        {(Article) => <Article {...props} />}
+    </Bundle>
+)

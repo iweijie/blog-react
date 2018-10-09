@@ -51,8 +51,8 @@ class App extends Component {
         }
     }
     getTags = () => {
-        let { asyncGetTagsList } = this.props;
-        asyncGetTagsList()
+        let { asyncGetDetailTagsList } = this.props;
+        asyncGetDetailTagsList()
     }
     submitHandle = () => {
         var { match } = this.props;
@@ -161,7 +161,7 @@ const mapStateToProps = (store) => {
     return {
         userInfo: store.userInfoModel,
         detial: store.articleDetialsModel,
-        tagsList: store.tagsListModel,
+        tagsList: store.tagsDetailListModel,
     }
 }
 

@@ -8,6 +8,7 @@ export const articleDetials = "articleDetials"
 export const articlesubmit = "articlesubmit"
 export const pushReview = "pushReview"
 export const tagsList = "tagsList"
+export const detailTagsList = "detailTagsList"
 export const currentTag = "getCurrentTag"
 
 // 清空文章列表
@@ -105,7 +106,18 @@ const asyncArticlTime = (params) => () => {
             message.error(e.messgae)
         })
 }
-
+// 新增 or 编辑 标签 
+const asyncSetTag = (params) => () => {
+    return axios.post(`${config.basicsUrl}/api/tags/add`, params)
+        .then(data => {
+            if (data.state == 1) {
+                return data
+            }
+        }).catch(e => {
+            console.log(e);
+            message.error(e.messgae)
+        })
+}
 // 获取标签列表
 const getTagsList = (value) => {
     return {
@@ -118,6 +130,25 @@ const asyncGetTagsList = (params) => (dispatch) => {
         .then(data => {
             if (data.state == 1) {
                 dispatch(getTagsList(data.result))
+            }
+            return data
+        }).catch(e => {
+            console.log(e);
+            message.error(e.messgae)
+        })
+}
+// 获取标签列表详细信息
+const getDetailTagsList = (value) => {
+    return {
+        type: detailTagsList,
+        payload: value
+    }
+}
+const asyncGetDetailTagsList = (params) => (dispatch) => {
+    return axios.post(`${config.basicsUrl}/api/tags/detailList`, params)
+        .then(data => {
+            if (data.state == 1) {
+                dispatch(getDetailTagsList(data.result))
             }
             return data
         }).catch(e => {
@@ -146,5 +177,8 @@ export default {
     syncArticleLeave,
     asyncGetTagsList,
     getTagsList,
-    setCurrentTag
+    setCurrentTag,
+    asyncGetDetailTagsList,
+    getDetailTagsList,
+    asyncSetTag
 }

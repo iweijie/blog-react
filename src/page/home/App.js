@@ -26,13 +26,8 @@ class App extends Component {
         this.init(this.props)
     }
     init = (params) => {
-        let { homeBgList, asyncGetTagsList } = params;
-        if (!homeBgList || !homeBgList.length) {
-            params.getHomeBgImageActionASync()
-        }
-        // if (!tags || !tags.length) {
+        let { asyncGetTagsList } = params;
         asyncGetTagsList()
-        // }
         this.getArticleList(params)
     }
     getArticleList = (params) => {
