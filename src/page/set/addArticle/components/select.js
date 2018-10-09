@@ -4,7 +4,7 @@
 *参数说明:
 *时间: 2018/4/16 10:48
 */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import observer from "util/observer"
 import {
     Form,
@@ -27,25 +27,25 @@ class SelectDate extends Component {
         labelCol: { span: 5 },
         wrapperCol: { span: 19 }
     }
-    componentDidMount(){
-        observer.on("addArticleSelect",this.getValue)
+    componentDidMount() {
+        observer.on("addArticleSelect", this.getValue)
     }
-    getValue = ()=>{
-        var {getFieldsValue} = this.props.form
+    componentWillUnmount(){
+        observer.remove("addArticleSelect", this.getValue)
+    }
+    getValue = () => {
+        var { getFieldsValue } = this.props.form
         return getFieldsValue()
     }
     render() {
-        var {getFieldDecorator} = this.props.form
-        var {defualtvalue} = this.props
-        var {title,classify,description,ispublic} = defualtvalue
-        var {linearArr} =this.props.menuInfos
-        var reg = /^\/article\/list\/[A-z0-9]+$/
-        linearArr = linearArr.filter(v=>reg.test(v.url))
-        var options = linearArr.map(v=><Option key={v._id} value={v.classify}>{v.title}</Option>)
+        var { getFieldDecorator } = this.props.form
+        var { defualtvalue,tagsList } = this.props
+        var { title, tags, description, ispublic } = defualtvalue
+        var options = tagsList.map(v => <Option key={v.tagCode} value={v.tagCode}>{v.tagName}</Option>)
         return (
             <Form className="form-select">
                 <Row type="flex" justify="space-between">
-                    <Col span={24} style={{paddingLeft:"40px",position:"relative"}}>
+                    <Col span={24} style={{ paddingLeft: "40px", position: "relative" }}>
                         <label className="select-label">标题：</label>
                         <FormItem>
                             {getFieldDecorator('title', {
@@ -56,21 +56,23 @@ class SelectDate extends Component {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} style={{paddingLeft:"40px",position:"relative"}}>
-                        <label className="select-label">分类：</label>
+                    <Col span={24} style={{ paddingLeft: "40px", position: "relative" }}>
+                        <label className="select-label">标签：</label>
                         <FormItem>
-                            {getFieldDecorator('classify', {
+                            {getFieldDecorator('tags', {
                                 rules: [{ required: true, message: 'Please input title!' }],
-                                initialValue: classify,
+                                initialValue: tags,
                             })(
-                                <Select  placeholder="分类">
+                                <Select
+                                    mode="multiple"
+                                    placeholder="标签">
                                     {options}
                                 </Select>
                             )}
                         </FormItem>
                     </Col>
 
-                    <Col span={24} style={{paddingLeft:"40px",position:"relative"}}>
+                    <Col span={24} style={{ paddingLeft: "40px", position: "relative" }}>
                         <label className="select-label">描述：</label>
                         <FormItem>
                             {getFieldDecorator('description', {
@@ -82,15 +84,16 @@ class SelectDate extends Component {
                         </FormItem>
                     </Col>
 
-                    <Col md={11}  span={24} style={{paddingLeft:"80px",position:"relative"}}>
+                    <Col md={11} span={24} style={{ paddingLeft: "80px", position: "relative" }}>
                         <label className="select-label">是否公开：</label>
                         <FormItem>
-                            {getFieldDecorator('ispublic',{
-                                initialValue: ispublic !== undefined ? ispublic : true,
+                            {getFieldDecorator('ispublic', {
+                                initialValue: ispublic !== undefined ? ispublic : 0,
                             })(
                                 <RadioGroup >
-                                    <Radio value>公开</Radio>
-                                    <Radio value={false}>私有</Radio>
+                                    <Radio value={0}>公开</Radio>
+                                    <Radio value={1}>登入可见</Radio>
+                                    <Radio value={2}>私有</Radio>
                                 </RadioGroup>
                             )}
                         </FormItem>

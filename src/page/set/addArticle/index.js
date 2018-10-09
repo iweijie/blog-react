@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Prompt } from 'react-router-dom'
-import history from "util/history"
-// import actions from 'actions'
 import dispatchAction from "util/dispatchAction"
 import Edit from "./components/edit"
 import Select from "./components/select"
@@ -22,14 +20,17 @@ class App extends Component {
         setDefault: false,
         defaultData: null
     }
-    timerId = null
-    when = false
+    timerId = null ;
+    when = false ;
     isAdd = false;
     UNSAFE_componentWillMount() {
         var { getArticleDetails, match } = this.props;
-        var id = match.params.id;
-        if (match.url == "/add/article") {
+        var reg = /^\/set\/article\/edit\/([A-z0-9]+)$/;
+        let id;
+        if (match.url == "/set/article/add") {
             this.isAdd = true
+        }else if(match.url.match(reg)){
+            id = match.params.id
         }
         if (id && !this.isAdd) {
             getArticleDetails({ id })
@@ -40,13 +41,23 @@ class App extends Component {
                     setDefault: true
                 })
             }
-            this.timerId = setInterval(this.saveLocal, 2 * 60 * 1000)
         }
+        this.timerId = setInterval(this.saveLocal, 2 * 60 * 1000)
+        this.getTags()
+    }
+    UNSAFE_componentWillReceiveProps(next) {
+        if (next.userInfo !== this.props.userInfo) {
+            this.getTags()
+        }
+    }
+    getTags = () => {
+        let { asyncGetTagsList } = this.props;
+        asyncGetTagsList()
     }
     submitHandle = () => {
         var { match } = this.props;
-        var id = match.params.id;
-        var params = this.getContent()
+        let id = match.params.id
+        var params = this.getContent();
         if (!this.isAdd) {
             params.id = id
         }
@@ -68,11 +79,10 @@ class App extends Component {
     }
     getContent = () => {
         var { userInfo } = this.props;
-        var content = observer.emit("addArticleEdit")
-        var params = observer.emit("addArticleSelect")
+        var content = observer.emit("addArticleEdit")[0]
+        var params = observer.emit("addArticleSelect")[0]
         params.content = content
         params.autor = userInfo.userId
-        // params.classify = params.classify.toLowerCase()
         return params
     }
     saveLocal = () => {
@@ -82,7 +92,7 @@ class App extends Component {
         localStorage.setItem("addarticle", str)
     }
     location = (location) => {
-        if (location.pathname != "/technology/add") {
+        if (!location.pathname.match(/\/set\/article\/.+/)) {
             if (this.when) {
                 return true
             }
@@ -109,7 +119,6 @@ class App extends Component {
         })
     }
     componentWillUnmount() {
-        observer.remove()
         this.props.articleDetailsAction({})
         clearInterval(this.timerId)
     }
@@ -124,8 +133,8 @@ class App extends Component {
             defualtvalue = detial
             headtitle = "修改界面"
         }
-        let { classify, content, description, ispublic, title } = defualtvalue;
-        params = { classify, description, ispublic, title }
+        let { tags, content, description, ispublic, title } = defualtvalue;
+        params = { tags, description, ispublic, title }
 
         return (
             <div className="edit-wrap">
@@ -133,7 +142,7 @@ class App extends Component {
                 <h3>{headtitle}</h3>
                 <Select defualtvalue={params} {...this.props} />
                 <Edit defualtvalue={content} />
-                <Button onClick={this.submitHandle} type="primary" className="edit-submit margin-ms-top">提交</Button>
+                <Button onClick={this.submitHandle} type="primary" className="edit-submit mt20">提交</Button>
                 <Modal
                     width={348}
                     className="login-modal"
@@ -152,7 +161,7 @@ const mapStateToProps = (store) => {
     return {
         userInfo: store.userInfoModel,
         detial: store.articleDetialsModel,
-        menuInfos: store.menuInfos,
+        tagsList: store.tagsListModel,
     }
 }
 

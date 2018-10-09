@@ -26,13 +26,13 @@ class App extends Component {
         this.init(this.props)
     }
     init = (params) => {
-        let { homeBgList, asyncGetTagsList, tags } = params;
+        let { homeBgList, asyncGetTagsList } = params;
         if (!homeBgList || !homeBgList.length) {
             params.getHomeBgImageActionASync()
         }
-        if (!tags || !tags.length) {
-            asyncGetTagsList()
-        }
+        // if (!tags || !tags.length) {
+        asyncGetTagsList()
+        // }
         this.getArticleList(params)
     }
     getArticleList = (params) => {
@@ -93,7 +93,7 @@ class App extends Component {
     componentWillUnmount() {
         window.removeEventListener("scroll", this.scroll)
     }
-    componentWillReceiveProps(next) {
+    UNSAFE_componentWillReceiveProps(next) {
         let { match } = next;
         let id = match.params.id;
         if (next.userInfo !== this.props.userInfo) {

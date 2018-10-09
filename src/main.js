@@ -18,7 +18,8 @@ class App extends Component {
     constructor(props, context) {
         super(props, context);
     }
-    state = {
+    UNSAFE_componentWillMount(){
+        this.props.syncuserInfoCheckAction()
     }
     componentDidMount() {
         window.addEventListener("resize", throttle(() => {

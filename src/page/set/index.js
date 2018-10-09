@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import dispatchAction from "util/dispatchAction"
 import Topnav from "../comom/topNav"
-import { Switch, Route ,Redirect } from 'react-router-dom'
+import LeftNav from "./leftNav"
+import { Switch, Route, Redirect } from 'react-router-dom'
 import {
     AsyncArticle
 } from "./components"
-import {
-    Icon
-} from "antd"
+import "./css.scss"
 
 
 class App extends Component {
@@ -17,14 +16,21 @@ class App extends Component {
         super(props);
     }
     render() {
-        let match = this.props.match;
+        let {height} = this.props.browserInfo
+        let url = "/set";
         const content = (
             <div ref="set" className="set">
                 <Topnav isFixed />
-                <Switch>
-                    <Route key="AsyncArticle" exact path={`${match.url}/article`} component={AsyncArticle} />
-                    <Redirect to={`${match.url}/article`} />
-                </Switch>
+                <div className="set-wrap">
+                    <div className="set-left">
+                        <LeftNav />
+                    </div>
+                    <div className="set-right" style={{minHeight:height-56-40+"px"}}>
+                        <Route key="AsyncArticleAdd" exact path={`${url}/article/add`} component={AsyncArticle} />
+                        <Route key="AsyncArticleEdit" exact path={`${url}/article/edit/:id`} component={AsyncArticle} />
+                        <Route key="test" exact path={`${url}/test`} render={() => <div>123</div>} />
+                    </div>
+                </div>
             </div>
         )
 
@@ -35,7 +41,8 @@ class App extends Component {
 }
 const mapStateToProps = (store) => {
     return {
-        userInfo: store.userInfoModel
+        userInfo: store.userInfoModel,
+        browserInfo: store.browserInfo
     }
 }
 

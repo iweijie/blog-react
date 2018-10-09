@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import dispatchAction from "util/dispatchAction"
+import history from "util/history"
 import {
     Form,
     Modal,
@@ -17,7 +18,7 @@ class App extends Component {
         super(props, context);
     }
     state = {
-        visible: false
+        visible: true
     }
     limit = true
     show = () => {
@@ -56,7 +57,7 @@ class App extends Component {
                     if (result.state) {
                         message.success(result.msg || "登入成功")
                         setTimeout(() => {
-                            window.location.reload()
+                            history.go(-1)
                         }, 1500)
                     } else {
                         message.warning(result.msg)

@@ -86,6 +86,7 @@ class App extends Component {
     componentWillUnmount() {
         clearInterval(this.timerId)
         clearInterval(this.setDefaultValueTimerId)
+        observer.remove("addArticleEdit", this.getValue)
     }
     render() {
         return (

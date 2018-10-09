@@ -1,8 +1,7 @@
 .edit-wrap {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    width: 94%;
-    margin: 0 auto;
+    padding: 20px;
+    font-size: 12px;
+    background-color: #f1f1f1;
 }
 .edit-wrap h3 {
     font-size: 16px;
@@ -61,6 +60,7 @@
 }
 .CodeMirrorEditWrap .CodeMirror-scroll {
     height:470px;
+    font-size: 12px;
 }
 .CodeMirrorEditWrap .article-detail-content {
     padding:0 20px;
@@ -72,11 +72,4 @@
 }
 .form-select .ant-form-item {
     margin-bottom: 15px;
-}
-
-.edit-wrap {
-    width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f1f1f1;
 }
