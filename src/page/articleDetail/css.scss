@@ -120,11 +120,15 @@
     height: 50px;
     line-height: 50px;
     margin-bottom: 20px;
+    text-align: center;
     span {
         display: inline-block;
         cursor: pointer;
+        &:last-child {
+            margin-left: 25px;
+        }
         &:first-child {
-            margin-right: 25px;
+            margin-left: 0;
         }
         &.active {
             color:#fff;
