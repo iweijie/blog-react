@@ -28,11 +28,9 @@ class Verification extends React.Component {
         /^\/edit\/article\/[A-z0-9]+$/,
     ]
     check = (props) => {
-        console.log("check---------------111111111")
         var { menuInfos, userInfo } = props;
         var isLogin = userInfo.isLogin;
         var pathList = menuInfos.menuPath;
-        console.log(pathList,"check---------------111111111")
         if (!pathList.length) return true
         var location = history.location
         var url = location.pathname;

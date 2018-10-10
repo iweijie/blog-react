@@ -73,3 +73,48 @@
 .form-select .ant-form-item {
     margin-bottom: 15px;
 }
+
+.article-detail-content {
+    ol {
+        padding-left: 2em;
+        li {
+            list-style-type: decimal;
+            margin-top: 0.4em;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+        
+    }
+    pre {
+        padding: 10px 20px;
+        background: url("../../../images/blueprint.png") rgba(202, 203, 203, 0.1);
+        border-radius: 5px;
+    }
+    img {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+    }
+    h2 {
+        font-size: 1.75em;
+        font-weight: 700;
+    }
+    h3 {
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+    blockquote {
+        padding: 1em;
+        color: #6a737d;
+        background-color: rgba(202, 203, 203, 0.1);
+        border-left: 0.25em solid #dfe2e5;
+        p {
+            margin: 0;
+        }
+    }
+    a {
+        color: #009a61;
+        text-decoration: underline;
+    }
+}

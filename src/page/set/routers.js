@@ -17,3 +17,12 @@ export const AsyncTags = (props) => (
         {(Article) => <Article {...props} />}
     </Bundle>
 )
+
+/**
+ * 标签列表
+ */
+export const AsyncSelftalking = (props) => (
+    <Bundle load={() => import("./selftalking/index")}>
+        {(Article) => <Article {...props} />}
+    </Bundle>
+)

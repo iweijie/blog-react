@@ -5,7 +5,6 @@
 *时间: 2018/4/16 10:48
 */
 import React, { PureComponent } from 'react';
-import recommendJson from "json/recommend"
 import { Link } from 'react-router-dom'
 import {
     Icon
@@ -13,15 +12,16 @@ import {
 
 class Recommend extends PureComponent {
     render() {
+        let {list} = this.props
         let recommend = (
             <div className="home-recommend unification-title">
                 <p><Icon type="fire" theme="filled" /> 群魔乱舞</p>
                 <ul>
                     {
-                        recommendJson.map((v, k) => {
+                        list.map((v, k) => {
                             return <li key={v._id}>
                                 <span>{k + 1}</span>
-                                <Link to={"/"}>{v.title}</Link>
+                                <Link to={"/article/detail/"+v._id}>{v.title}</Link>
                             </li>
 
                         })

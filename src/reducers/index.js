@@ -9,12 +9,13 @@ import {
 } from 'redux'
 import {
     userInfo,
-    menutoggle
+    // menutoggle
 } from "actions/common"
 import menuInfos from "./menu"
 import home from "./home"
 import article from "./article"
 import common from "./common"
+import selftalking from "./selftalking"
 
 function userInfoModel(state = {
     isLogin: false,
@@ -30,21 +31,22 @@ function userInfoModel(state = {
     }
 }
 
-function menutoggleModel(state = false, action) {
-    switch (action.type) {
-        case menutoggle:
-            return action.payload;
-        default:
-            return state;
-    }
-}
+// function menutoggleModel(state = false, action) {
+//     switch (action.type) {
+//         case menutoggle:
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// }
 const rootReducer = combineReducers({
-    menutoggleModel,
+    // menutoggleModel,
     userInfoModel,
     ...menuInfos,
     ...home,
     ...article,
     ...common,
+    ...selftalking
 })
 
 export default rootReducer

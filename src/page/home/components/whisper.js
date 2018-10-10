@@ -51,6 +51,7 @@ class Whisper extends PureComponent {
         this.clearLoop()
     }
     render() {
+        let {list} = this.props;
         this.carouselList = [];
         var str = "whisper";
         this.carouselList.push(str)
@@ -59,18 +60,22 @@ class Whisper extends PureComponent {
             <div className={"home-whisper-content"}
                 onMouseLeave={this.MouseLeaveHandle}
                 onMouseEnter={() => this.MouseEnterHandle(str)}>
-                <Carousel
-                    dots={false}
-                    ref={str}
-                    vertical>
-                    {
-                        whisperJson.map((val, key) => (
-                            <div key={key} className={"whisper"}>
-                                {val.discription}
-                            </div>
-                        ))
-                    }
-                </Carousel>
+                {
+                    list && list.length?
+                    <Carousel
+                        dots={false}
+                        ref={str}
+                        vertical>
+                        {
+                            list.map((val) => (
+                                <div key={val._id} className={"whisper"}>
+                                    {val.content}
+                                </div>
+                            ))
+                        }
+                    </Carousel>
+                    :null
+                }
             </div>
         </div>)
     }

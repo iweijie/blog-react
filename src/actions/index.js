@@ -8,6 +8,7 @@ import articleAction from "./article"
 import configAction from "./config"
 import home from "./home"
 import fileUpload from "./fileUpload"
+import selftalking from "./selftalking"
 
 
 const actions = {
@@ -15,7 +16,8 @@ const actions = {
     ...articleAction,
     ...configAction,
     ...home,
-    ...fileUpload
+    ...fileUpload,
+    ...selftalking
 }
 
 export default actions

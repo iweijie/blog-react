@@ -26,8 +26,13 @@ class App extends PureComponent {
         if (!id) return
         history.push("/article/detail/" + id)
     }
+    gotoEditPag = (id)=>{
+        if (!id) return
+        history.push("/set/article/edit/" + id)
+    }
     render() {
-        var { list } = this.props;
+        var { list,userInfo } = this.props;
+        let {userId} = userInfo
         list = list || []
         console.log(list)
         const content = (
@@ -46,6 +51,11 @@ class App extends PureComponent {
                             }
 
                             <h3 className="article-list-item-title underline" onClick={() => this.goTo(data._id)}>{data.title}</h3>
+                            {
+                                userId && data.autor && userId === data.autor._id ?
+                                <span onClick={()=>this.gotoEditPag(data._id)} className="article-list-item-edit"><Icon type="edit" theme="outlined" /></span>
+                                : null
+                            }
                             <p className="article-list-item-descrption">{data.description}</p>
                             <div className="article-list-item-author">
                                 <span className="mr10">

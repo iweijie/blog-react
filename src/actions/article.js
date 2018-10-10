@@ -10,6 +10,8 @@ export const pushReview = "pushReview"
 export const tagsList = "tagsList"
 export const detailTagsList = "detailTagsList"
 export const currentTag = "getCurrentTag"
+export const recommendList = "recommendList"
+
 
 // 清空文章列表
 const clearArticleListAction = () => ({
@@ -163,6 +165,27 @@ const setCurrentTag = (value) => {
         payload: value
     }
 }
+// 推荐列表
+const recommendListAction = (value) => {
+    return {
+        type: recommendList,
+        payload: value
+    }
+}
+const AsyncrecommendList = (params) => (dispatch) => {
+    return axios.post(`${config.basicsUrl}/api/article/recommend`, params)
+        .then(data => {
+            if (data.state == 1) {
+                dispatch(recommendListAction(data.result))
+                return data
+            }
+            return data
+        }).catch(e => {
+            console.log(e);
+            message.error(e.messgae)
+        })
+}
+
 export default {
     clearArticleListAction,
     appendArticleListAction,
@@ -180,5 +203,7 @@ export default {
     setCurrentTag,
     asyncGetDetailTagsList,
     getDetailTagsList,
-    asyncSetTag
+    asyncSetTag,
+    AsyncrecommendList,
+    recommendListAction
 }

@@ -234,21 +234,6 @@
         }
     }
 }
-.pagination {
-    padding: 10px;
-    margin: 20px 0 0;
-    font-size: 14px;
-    text-align: center;
-    background-color: #fff;
-    @include pointer;
-    &:hover {
-        background-color: $houverBgColor;
-    }
-    &.disabled {
-        background-color: #e1e1e1;
-        cursor:not-allowed;
-    }
-}
 .home-tags {
     line-height: 20px;
     background-color: #fff;

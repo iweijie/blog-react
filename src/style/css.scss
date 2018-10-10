@@ -4,3 +4,19 @@ $blue : #0088f5 ;
 @mixin pointer {
     cursor: pointer;
 }
+
+.pagination {
+    padding: 10px;
+    margin: 20px 0 0;
+    font-size: 14px;
+    text-align: center;
+    background-color: #fff;
+    @include pointer;
+    &:hover {
+        background-color: $houverBgColor;
+    }
+    &.disabled {
+        background-color: #e1e1e1;
+        cursor:not-allowed;
+    }
+}

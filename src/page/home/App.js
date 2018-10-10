@@ -24,16 +24,25 @@ class App extends Component {
     pageSize = 10
     UNSAFE_componentWillMount() {
         this.init(this.props)
+        let { selftalking,selftalkingListActionAsync,AsyncrecommendList,recommendListModel } = this.props;
+        if (!recommendListModel || !recommendListModel.length) {
+            AsyncrecommendList()
+        }
+        if (!selftalking.count || !selftalking.result.length) {
+            selftalkingListActionAsync({page:1,pageSize:999})
+        }
     }
     init = (params) => {
-        let { asyncGetTagsList } = params;
-        asyncGetTagsList()
+        let { tags, asyncGetTagsList } = params;
+        if (!tags || !tags.length) {
+            asyncGetTagsList()
+        }
         this.getArticleList(params)
     }
     getArticleList = (params) => {
-        let { articleList, total, match, currentTag ,setCurrentTag} = params;
+        let { articleList, total, match, currentTag, setCurrentTag } = params;
         let id = match.params.id;
-        let { page, pageSize ,flag} = this
+        let { page, pageSize, flag } = this
         if (flag && ((id && id !== currentTag) || (id === undefined && currentTag))) {
             this.flag = false
             let params = { page: 1, pageSize }
@@ -43,12 +52,12 @@ class App extends Component {
                 params.tag = id
             }
             this.props.getArticleListAsync(params, true)
-            .then(()=>{
-                this.flag = true
-            })
-            .catch(()=>{
-                this.flag = true
-            })
+                .then(() => {
+                    this.flag = true
+                })
+                .catch(() => {
+                    this.flag = true
+                })
         } else {
             if (flag && (!total || !articleList || !articleList.length)) {
                 this.flag = false
@@ -60,12 +69,12 @@ class App extends Component {
                     params.tag = id
                 }
                 this.props.getArticleListAsync(params, true)
-                .then(()=>{
-                    this.flag = true
-                })
-                .catch(()=>{
-                    this.flag = true
-                })
+                    .then(() => {
+                        this.flag = true
+                    })
+                    .catch(() => {
+                        this.flag = true
+                    })
             } else {
                 this.page = Math.ceil(articleList.length / pageSize)
             }
@@ -104,18 +113,18 @@ class App extends Component {
     }
     scroll = throttle(this.scrollHandle, 100);
     render() {
-        let { homeBgList, browserInfo, homeScrollToTop, articleList, total, tags } = this.props;
+        let { homeBgList, browserInfo, homeScrollToTop, articleList, total, tags ,userInfo,selftalking,recommendList } = this.props;
         let { page, pageSize } = this
         let isFixed = browserInfo.height - homeScrollToTop <= 56;
         const content = (
             <div ref="home" className="home">
                 <Bg list={homeBgList} browserInfo={browserInfo}></Bg>
-                <Topnav isFixed={isFixed} />
+                <Topnav userInfo={userInfo} isFixed={isFixed} />
                 <div style={{ backgroundColor: "#f1f1f1" }}>
                     <div className="home-content">
                         <div className="home-content-left">
-                            <Whisper></Whisper>
-                            <ArticleList list={articleList} />
+                            <Whisper list={selftalking.result}></Whisper>
+                            <ArticleList userInfo={userInfo} list={articleList} />
                             {
                                 total && total > (page * pageSize) ?
                                     <p className="pagination" onClick={() => this.pagination(total)}>
@@ -128,7 +137,7 @@ class App extends Component {
                             }
                         </div>
                         <div className="home-content-right">
-                            <Recommend></Recommend>
+                            <Recommend list={recommendList}></Recommend>
                             <div className="unification-title mb20">
                                 <p><Icon type="credit-card" theme="filled" /> 备忘录</p>
                                 <Calendar changeDate={this.changeDate} />
@@ -143,7 +152,6 @@ class App extends Component {
                 </div>
             </div>
         )
-
         return (
             content
         );
@@ -159,6 +167,8 @@ const mapStateToProps = (store) => {
         total: store.articleListModel.total,
         tags: store.tagsListModel,
         currentTag: store.getCurrentTag,
+        selftalking: store.selftalkingListModel,
+        recommendList: store.recommendListModel
     }
 }
 
