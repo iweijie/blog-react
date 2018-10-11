@@ -19,10 +19,18 @@ export const AsyncTags = (props) => (
 )
 
 /**
- * 标签列表
+ * 碎碎念记录列表
  */
 export const AsyncSelftalking = (props) => (
     <Bundle load={() => import("./selftalking/index")}>
+        {(Article) => <Article {...props} />}
+    </Bundle>
+)
+/**
+ * 上传文件列表
+ */
+export const AsyncFile = (props) => (
+    <Bundle load={() => import("./upload/index")}>
         {(Article) => <Article {...props} />}
     </Bundle>
 )

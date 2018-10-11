@@ -8,7 +8,8 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import {
     AsyncArticle,
     AsyncTags,
-    AsyncSelftalking
+    AsyncSelftalking,
+    AsyncFile
 } from "./routers"
 import "./css.scss"
 
@@ -33,6 +34,7 @@ class App extends Component {
                             <Route key="AsyncArticleAdd" exact path={`${url}/article/add`} component={AsyncArticle} />
                             <Route key="AsyncArticleEdit" exact path={`${url}/article/edit/:id`} component={AsyncArticle} />
                             <Route key="AsyncSelftalking" exact path={`${url}/selftalking`} component={AsyncSelftalking} />
+                            <Route key="AsyncFile" exact path={`${url}/upload`} component={AsyncFile} />
                             <Route key="Asynctags" exact path={`${url}/tags`} component={AsyncTags} />
                         </Switch>
                     </div>
