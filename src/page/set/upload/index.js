@@ -79,13 +79,13 @@ class App extends Component {
     componentWillUnmount() {
     }
     render() {
-        let { tagsList,userInfo } = this.props;
+        let { tagsList,userInfo,uploadAsync } = this.props;
         tagsList.forEach(v => {
             v.key = v.tagCode
         })
         return (
             <div className="set-upload-wrap">
-                <Add userInfo={userInfo}></Add>
+                <Add userInfo={userInfo} uploadAsync={uploadAsync}></Add>
             </div>
         );
     }

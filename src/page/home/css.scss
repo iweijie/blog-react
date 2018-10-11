@@ -76,7 +76,10 @@
     line-height: 34px;
     position: relative;
     padding-left: 100px;
-
+    .home-whisper-content {
+        height: 34px;
+        overflow: hidden;
+    }
     >a {
         font-size: 14px;
         color: #0088f5;

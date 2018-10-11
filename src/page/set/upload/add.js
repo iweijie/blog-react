@@ -7,7 +7,9 @@ import {
     Col,
     Radio,
     Form,
-    Modal
+    Modal,
+    Icon,
+    message
 } from "antd"
 const FormItem = Form.Item
 const RadioGroup = Radio.Group;
@@ -18,7 +20,9 @@ class App extends Component {
         super(props);
     }
     state = {
-        visible: false
+        visible: false,
+        fileList : [],
+        fileMap:{}
     }
     controlModel = (flag = true) => {
         this.setState({
@@ -29,22 +33,66 @@ class App extends Component {
     }
     handleOk = () => {
         const { validateFields } = this.props.form;
-        let { userInfo } = this.props;
+        let {fileList} = this.state;
+        let { userInfo,uploadAsync } = this.props;
         if (!userInfo.isLogin) return;
         validateFields((err, value) => {
             if (err) {
                 return
             }
-            console.log(value)
+            if(!fileList.length) return message.warning("请先选择文件");
+            var formData = new FormData()
+            for(var k in value){
+                formData.append(k,value[k])
+            }
+            fileList.forEach(v=>{
+                formData.append("file",v)
+            })
+            uploadAsync(formData)
+            .then(data=>{
+                if(data){
+                    this.handleCancel()
+                }
+            })
         })
     }
     handleCancel = () => {
         this.controlModel(false)
+        this.setState({
+            fileList:[],
+            fileMap:{}
+        })
+    }
+    arouseInput = ()=>{
+        let input = document.querySelector("#set-upload-input");
+        input.click()
+    }
+    inputChange = ()=>{
+        let input = document.querySelector("#set-upload-input");
+        let {fileList,fileMap} = this.state;
+        let len = input.files.length
+        if(len){
+            for(var i=0;i<len;i++){
+                let data = input.files[i];
+                if(!fileMap[data.name]){
+                    fileMap[data.name] = 1 ;
+                    fileList.push(data)
+                }else {
+                    message.warning(`${data.name}已存在`)
+                }
+            }
+            this.setState({
+                fileList,
+                fileMap
+            })
+        }
+        input.value = "";
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         let { userInfo } = this.props;
         let { userId, userName } = userInfo;
+        let {fileList} = this.state
         return (
             <div className="set-upload--add-wrap">
                 <div className="set-upload-add">
@@ -64,10 +112,19 @@ class App extends Component {
                             <Col span={24} style={{ position: "relative" }}>
                                 <label className="select-label">选择文件：</label>
                                 <FormItem>
-                                    <span className="set-upload-btn">
-                                        <Button type="primary" icon="plus">添加文件</Button>
-                                        <input type="file" title=""/>
-                                    </span>
+                                    <Button className="set-upload-btn" onClick={this.arouseInput} type="primary" icon="plus">添加文件</Button>
+                                    <input multiple onChange={this.inputChange} id="set-upload-input" type="file" title=""/>
+                                    {
+                                        fileList.length ?
+                                        <ul className="set-upload-selected-file">
+                                            {
+                                                fileList.map((v,k)=>{
+                                                    return <li key={k}>{v.name}<Icon type="close" theme="outlined" /></li>
+                                                })
+                                            }
+                                        </ul>
+                                        :null
+                                    }
                                 </FormItem>
                             </Col>
                         </Row>
@@ -106,3 +163,9 @@ class App extends Component {
 }
 
 export default Form.create()(App)
+
+// {
+//     <span className="set-upload-btn">
+                                        
+//                                     </span>
+// }
