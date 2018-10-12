@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
-import whisperJson from "json/whisper"
 import { Link } from 'react-router-dom'
 import {
     Icon,
     Carousel
 } from "antd"
-import history from "util/history"
 
 class Whisper extends PureComponent {
     constructor(props) {
@@ -17,7 +15,9 @@ class Whisper extends PureComponent {
     nextCarousel = () => {
         if (!this.carouselList || !this.carouselList.length) return
         this.carouselList.forEach(v => {
-            this.refs[v].next()
+            if(this.refs[v]){
+                this.refs[v].next()
+            }
         })
     }
 
@@ -40,9 +40,6 @@ class Whisper extends PureComponent {
     }
     clearLoop = () => {
         clearInterval(this.timerId)
-    }
-    goTo = (path) => {
-        history.push(path)
     }
     componentDidMount() {
         this.startLoop(4000)
