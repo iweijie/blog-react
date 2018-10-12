@@ -14,7 +14,7 @@ import reducer from './reducers'
 import App from './main'
 import "util/pace.js"
 import  "util/pace/themes/blue/pace-theme-minimal.css"
-import "style/basics.css"
+import "style/basics.scss"
 import "./font/Offline-Rough.otf"
 
 const middleware = [thunk]

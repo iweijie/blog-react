@@ -6,12 +6,9 @@ import { throttle } from "util/baseTool"
 import dispatchAction from "util/dispatchAction"
 // import AnimatedRouter from 'react-animated-router';
 // import 'react-animated-router/animate.css';
-// import Menu from "page/leftMenu"
-// import Login from "page/login"
-// import Topnav from "page/topNav"
 import history from "util/history"
 // import io from "util/socket"
-import "util/observer"
+// import "util/observer"
 import "util/love"
 
 class App extends Component {
@@ -31,9 +28,6 @@ class App extends Component {
                 widht
             })
         }, 100))
-    }
-    back = () => {
-        history.go(-1)
     }
     render() {
         const content = (<Router history={history}>
