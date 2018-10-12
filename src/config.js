@@ -6,7 +6,8 @@ if (process.env.NODE_ENV !== 'production') {
     }
 }else {
     config = {
-        basicsUrl:"https://blogapi.iweijie.cn"
+        basicsUrl:"https://blogapi.iweijie.cn",
+        fileUrl:"http://file.iweijie.cn"
     }
 }
 
