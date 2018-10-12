@@ -35,7 +35,7 @@ class App extends Component {
     render() {
         let { height } = this.props.browserInfo;
         let { homeBgList, selftalking } = this.props;
-        let { result, count, page, pageSize } = selftalking
+        let { result} = selftalking
         let src = homeBgList && homeBgList.length && homeBgList[1].fullUrl || ""
         const content = (
             <div className="selftalking" >

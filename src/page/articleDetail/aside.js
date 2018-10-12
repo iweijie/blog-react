@@ -39,6 +39,21 @@ class Aside extends PureComponent {
             }
         </ol>
     }
+    componentDidMount(){
+        if(this.props.nav && !this.props.nav.length){
+            this.setState({
+                currentPanel:2
+            })
+        }
+    }
+    componentWillReceiveProps(next){
+        console.log("111111111111111111111111")
+        console.log(next.nav)
+        console.log(next.nav === this.props.nav)
+        // if(next.nav === this.props.nav){
+
+        // }
+    }
     toggle = (index,flag)=>{
         let {currentPanel} = this.state ;
         if(flag && flag === currentPanel) return ;
