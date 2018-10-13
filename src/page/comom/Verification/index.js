@@ -1,3 +1,4 @@
+// 核实是否登入
 import React from "react"
 import { connect } from 'react-redux';
 import history from "util/history"
@@ -7,56 +8,43 @@ class Verification extends React.Component {
     constructor(props) {
         super(props);
     }
+    state = {
+        sign: null
+    }
+    delayed = 2000;
+
     UNSAFE_componentWillMount() {
-        if (this.check(this.props)) {
-            window.Pace.start()
+        let { verify, userInfo } = this.props;
+        window.Pace.start()
+        if (verify && !userInfo.isLogin) {
+            let tmp = setTimeout(() => {
+                history.replace("/404")
+            }, this.delayed)
+            this.setState({
+                sign: tmp
+            })
         }
     }
     UNSAFE_componentWillReceiveProps(newPros) {
         var p = this.props
-        if (newPros.menuInfos != p.menuInfos || newPros.userInfo != p.userInfo) {
-            this.check(newPros)
+        if (newPros.userInfo != p.userInfo && newPros.userInfo && newPros.userInfo.isLogin) {
+            clearTimeout(this.state.sign)
+            this.setState({
+                sign: null
+            })
         }
 
-    }
-    //不需要登入
-    chekeother = [
-        /^\/article\/detail\/[A-z0-9]+$/,
-    ]
-    //需要登入
-    chekeLoginother = [
-        /^\/edit\/article\/[A-z0-9]+$/,
-    ]
-    check = (props) => {
-        var { menuInfos, userInfo } = props;
-        var isLogin = userInfo.isLogin;
-        var pathList = menuInfos.menuPath;
-        if (!pathList.length) return true
-        var location = history.location
-        var url = location.pathname;
-        for (var i = 0, l = this.chekeother.length; i < l; i++) {
-            if (this.chekeother[i].test(url)) return true
-        }
-        for (i = 0, l = this.chekeLoginother.length; i < l; i++) {
-            if (isLogin && this.chekeLoginother[i].test(url)) return true
-        }
-        if (!pathList.includes(url)) {
-            history.replace("/404")
-            return false
-        }
-        return true
     }
 
     render() {
-        return (
-            this.props.children
-        )
+        let { sign } = this.state;
+        return !!sign ? null : this.props.children
     }
 }
-const mapStateToProps = (store) => {
+const mapStateToProps = (store, own) => {
     return {
-        menuInfos: store.menuInfos,
-        userInfo: store.userInfoModel
+        userInfo: store.userInfoModel,
+        verify: own.verify
     }
 }
 export default connect(mapStateToProps)(Verification)

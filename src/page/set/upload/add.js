@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { timestampFromat } from "util/baseTool"
 import {
     Button,
     Input,
@@ -24,6 +23,7 @@ class App extends Component {
         fileList : [],
         fileMap:{}
     }
+    lock = true ;
     controlModel = (flag = true) => {
         this.setState({
             visible: flag
@@ -35,7 +35,7 @@ class App extends Component {
         const { validateFields } = this.props.form;
         let {fileList} = this.state;
         let { userInfo,uploadAsync } = this.props;
-        if (!userInfo.isLogin) return;
+        if (!userInfo.isLogin) return message.success("请先登入");
         validateFields((err, value) => {
             if (err) {
                 return
@@ -48,11 +48,17 @@ class App extends Component {
             fileList.forEach(v=>{
                 formData.append("file",v)
             })
+            if(!this.lock) return ;
+            this.lock = false ;
+            message.info("文件正在上传中");
             uploadAsync(formData)
             .then(data=>{
                 if(data){
                     this.handleCancel()
                 }
+            })
+            .finally(()=>{
+                this.lock = true ;
             })
         })
     }
@@ -88,6 +94,17 @@ class App extends Component {
         }
         input.value = "";
     }
+    clearFile = (data)=>{
+        let {fileList,fileMap} = this.state
+        let index = fileList.indexOf(data);
+        if(index !== -1){
+            fileList.splice(index,1);
+            delete fileMap[data.name]
+            this.setState({
+                fileList,fileMap
+            })
+        }
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         let { userInfo } = this.props;
@@ -119,7 +136,7 @@ class App extends Component {
                                         <ul className="set-upload-selected-file">
                                             {
                                                 fileList.map((v,k)=>{
-                                                    return <li key={k}>{v.name}<Icon type="close" theme="outlined" /></li>
+                                                    return <li key={k}>{v.name}<Icon onClick={()=>this.clearFile(v)} type="close" theme="outlined" /></li>
                                                 })
                                             }
                                         </ul>

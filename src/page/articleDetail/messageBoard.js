@@ -36,7 +36,7 @@ class App extends PureComponent {
         } else {
             params.name = data.name
         }
-        params.leave = encodeURIComponent(data.leave || "")
+        params.leave = data.leave || "";
         for (var k in params) {
             if (!params[k]) return message.warning("请填写完整参数")
         }
@@ -124,6 +124,7 @@ class App extends PureComponent {
             </div>
         )
         var leaveList = leavedata.map((v, k) => {
+            let html=  { __html: v.content }
             return <li key={v._id || k}>
                 <p>
                     {
@@ -131,11 +132,7 @@ class App extends PureComponent {
                             <span>回复  <span className="green">{v.replyName}</span>：</span>
                             : null
                     }
-                    <span style={v.replyName ? { padding: "0 20px" } : { paddingRight: "20px" }}>
-                        {
-                            decodeURIComponent(v.content)
-                        }
-                    </span>
+                    <span style={v.replyName ? { padding: "0 20px" } : { paddingRight: "20px" }} dangerouslySetInnerHTML={html}></span>
                     —
                     <span className="green mr10"> {v.name} </span>
                     <span>{timestampFromat(v.createTime)}</span>

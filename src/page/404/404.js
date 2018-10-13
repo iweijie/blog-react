@@ -25,7 +25,7 @@ class NotFound extends React.Component {
                 <h3>
                     咦？页面<span className="text-danger">出错了</span>？
                 </h3>
-                <p>您可以稍后再尝试
+                <p>您可以尝试
                     <a onClick={this.returnprev}>返回上一页</a>,或者
                     <Link to={"/"}>跳转至首页</Link>。
                 </p>

@@ -57,7 +57,7 @@ class App extends Component {
                     if (result.state) {
                         message.success(result.msg || "登入成功")
                         setTimeout(() => {
-                            history.go(-1)
+                            window.location.replace("/")
                         }, 1500)
                     } else {
                         message.warning(result.msg)
@@ -72,7 +72,8 @@ class App extends Component {
             })
     }
     handleCancel = () => {
-        document.removeEventListener("keydown", this.enterHandler)
+        document.removeEventListener("keydown", this.enterHandler);
+        history.go(-1)
     }
     render() {
 
@@ -134,8 +135,3 @@ const mapStateToProps = (store) => {
 }
 
 export default connect(mapStateToProps, dispatchAction)(Form.create()(App))
-
-
-
-
-

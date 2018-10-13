@@ -58,7 +58,7 @@ const AsyncLogin = (props) => (
  */
 const AsyncSelftalking = (props) => (
     <Bundle load={() => import('../page/selftalking')}>
-        {(Selftalking) => <Verification><Selftalking {...props} /></Verification>}
+        {(Selftalking) => <Verification verify><Selftalking {...props} /></Verification>}
     </Bundle>
 )
 /**
@@ -66,8 +66,7 @@ const AsyncSelftalking = (props) => (
  */
 const AsyncSet = (props) => (
     <Bundle load={() => import('../page/set')}>
-        {/* {(Setting) => <Setting {...props} />} */}
-        {(Setting) => <Verification><Setting {...props} /></Verification>}
+        {(Setting) => <Verification verify><Setting {...props} /></Verification>}
     </Bundle>
 )
 /**

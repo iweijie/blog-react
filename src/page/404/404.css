@@ -19,7 +19,9 @@
 .error p{
     margin-top: 77px;
 }
-
+.error a {
+    color:#00A8FF
+}
 @media screen and (max-width: 800px) {
     .error h2{
         font-size: 60px;

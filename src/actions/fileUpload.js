@@ -6,7 +6,7 @@ import config from "config"
 import {message} from "antd"
 
 const uploadAsync = (params)=>()=>{
-    return axios.post(`${config.fileUrl}/api/fileupload`,params,{
+    return axios.post(`${config.basicsUrl}/api/fileupload`,params,{
         "Content-Type":"multipart/form-data"
     })
         .then(data => {

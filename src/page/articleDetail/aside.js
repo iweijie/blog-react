@@ -46,7 +46,7 @@ class Aside extends PureComponent {
             })
         }
     }
-    componentWillReceiveProps(next){
+    UNSAFE_componentWillReceiveProps(next){
         console.log("111111111111111111111111")
         console.log(next.nav)
         console.log(next.nav === this.props.nav)
