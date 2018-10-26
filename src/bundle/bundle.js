@@ -13,25 +13,9 @@ export default class Bundle extends Component {
             mod: null
         };
     }
-    // check = (props)=>{
-    //     var {menuInfos} = props;
-    //     if(!menuInfos) return 
-    //     var pathList = menuInfos.menuPath;
-    //     if(!pathList.length) return true
-    //     var location = history.location
-    //     var url = location.pathname;
-    //     if(!pathList.includes(url)){
-    //         history.replace("/404")
-    //         return false
-    //     }
-    //     return true
-    // }
-
     UNSAFE_componentWillMount() {
-        // this.check(this.props)
         this.load(this.props)
     }
-
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.load.toString() !== this.props.load.toString()) {
             this.load(nextProps)

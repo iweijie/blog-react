@@ -12,23 +12,6 @@ const AsyncHome = (props) => (
     </Bundle>
 )
 /**
- *  文章列表
- */
-// const AsyncArticleList = (props) => (
-//     <Bundle load={() => import('../page/articleList/index')}>
-//         {(ArticleList) => <Verification key="2"><ArticleList {...props} /></Verification>}
-//     </Bundle>
-// )
-
-/**
- *  新增文章
- */
-// const AsyncAddArticle = (props) => (
-//     <Bundle load={() => import('../page/addArticle/index')}>
-//         {(AddArticle) => <Verification key="3"><AddArticle {...props} /></Verification>}
-//     </Bundle>
-// )
-/**
  *  查看文章详情
  */
 const AsyncArticleDetail = (props) => (
@@ -36,15 +19,6 @@ const AsyncArticleDetail = (props) => (
         {(ArticleDetail) => <Verification key="4"><ArticleDetail {...props} /></Verification>}
     </Bundle>
 )
-
-/**
- *  上传界面
- */
-// const AsyncUploadCom = (props) => (
-//     <Bundle load={() => import('../page/upload/App')}>
-//         {(UploadCom) => <Verification><UploadCom {...props} /></Verification>}
-//     </Bundle>
-// )
 /**
  *  登入
  */
