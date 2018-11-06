@@ -25,12 +25,12 @@ class TopNav extends React.PureComponent {
             icon: "home",
             state:1
         },
-        {
-            name: "标签",
-            url: "/label",
-            icon: "bars",
-            state:1
-        },
+        // {
+        //     name: "标签",
+        //     url: "/label",
+        //     icon: "bars",
+        //     state:1
+        // },
         {
             name: "设置",
             url: "/set",
@@ -39,7 +39,7 @@ class TopNav extends React.PureComponent {
         },
         {
             name: "关于",
-            url: "/about ",
+            url: "/about",
             icon: "user",
             state:1
         },

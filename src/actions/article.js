@@ -133,7 +133,7 @@ const asyncGetTagsList = (params) => (dispatch) => {
             if (data.state == 1) {
                 dispatch(getTagsList(data.result))
             }
-            return data
+            return data.result
         }).catch(e => {
             console.log(e);
             message.error(e.messgae)
@@ -152,7 +152,7 @@ const asyncGetDetailTagsList = (params) => (dispatch) => {
             if (data.state == 1) {
                 dispatch(getDetailTagsList(data.result))
             }
-            return data
+            return data.result
         }).catch(e => {
             console.log(e);
             message.error(e.messgae)

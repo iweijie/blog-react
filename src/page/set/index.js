@@ -30,12 +30,12 @@ class App extends Component {
                     </div>
                     <div className="set-right" style={{ minHeight: height - 56 - 40 + "px" }}>
                         <Switch>
-                            <Route key="test" exact path={`${url}/test`} render={() => <div>123</div>} />
                             <Route key="AsyncArticleAdd" exact path={`${url}/article/add`} component={AsyncArticle} />
                             <Route key="AsyncArticleEdit" exact path={`${url}/article/edit/:id`} component={AsyncArticle} />
                             <Route key="AsyncSelftalking" exact path={`${url}/selftalking`} component={AsyncSelftalking} />
                             <Route key="AsyncFile" exact path={`${url}/upload`} component={AsyncFile} />
                             <Route key="Asynctags" exact path={`${url}/tags`} component={AsyncTags} />
+                            <Redirect  to={`${url}/selftalking`} />
                         </Switch>
                     </div>
                 </div>

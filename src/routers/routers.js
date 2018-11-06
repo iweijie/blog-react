@@ -1,5 +1,6 @@
-/* eslint-disable */
 import React from 'react'
+import history from "util/history"
+import { Router, Switch, Route } from 'react-router-dom'
 import Bundle from '../bundle/bundle'
 import Verification from "page/comom/Verification"
 
@@ -44,6 +45,14 @@ const AsyncSet = (props) => (
     </Bundle>
 )
 /**
+ * 关于
+ */
+const AsyncAbout = (props) => (
+    <Bundle load={() => import('../page/about')}>
+        {(About) => <Verification><About {...props} /></Verification>}
+    </Bundle>
+)
+/**
  *  404
  */
 const AsyncNoFound = (props) => (
@@ -53,7 +62,7 @@ const AsyncNoFound = (props) => (
 )
 
 
-export const routes = [
+const routes = [
     {
         path: '/',
         exact: true,
@@ -84,6 +93,11 @@ export const routes = [
         component: AsyncSet,
     },
     {
+        path: '/about',
+        component: AsyncAbout,
+        exact: true,
+    },
+    {
         path: '/404',
         component: AsyncNoFound,
         exact: true,
@@ -94,3 +108,13 @@ export const routes = [
     }
 
 ]
+
+export default (props) => (
+    <Router history={history}>
+        <Switch>
+            {routes.map((route, i) => (
+                <Route key={i} {...route} />
+            ))}
+        </Switch>
+    </Router>
+)
